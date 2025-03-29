@@ -2,8 +2,8 @@ package domain.prendas;
 
 public class Prenda {
     // Atributos
-    private int precioBase;
-    private Tipo tipo;
+    private final int precioBase;
+    private final Tipo tipo;
     private Estado estado;
 
     // Inicializador
@@ -14,10 +14,6 @@ public class Prenda {
     }
 
     // Getters y setters
-    public int getPrecioBase() {
-        return this.precioBase;
-    }
-
     public Tipo getTipo() {
         return this.tipo;
     }
