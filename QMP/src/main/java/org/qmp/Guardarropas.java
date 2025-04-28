@@ -2,6 +2,7 @@ package org.qmp;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.qmp.prendas.Prenda;
 
 public class Guardarropas {
   private List<Prenda> prendas;

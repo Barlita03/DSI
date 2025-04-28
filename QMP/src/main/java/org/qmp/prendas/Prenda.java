@@ -1,7 +1,4 @@
-package org.qmp;
-
-import org.qmp.exceptions.NonModificableObject;
-import org.qmp.exceptions.NullParamException;
+package org.qmp.prendas;
 
 public class Prenda {
   private final TipoDePrenda tipoDePrenda;

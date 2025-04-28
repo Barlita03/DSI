@@ -1,10 +1,11 @@
-package org.qmp;
+package org.qmp.prendas;
 
 public enum TipoDePrenda {
   REMERA(Categoria.PARTE_SUPERIOR),
   CAMISA(Categoria.PARTE_SUPERIOR),
   CAMPERA(Categoria.PARTE_SUPERIOR),
   BUZO(Categoria.PARTE_SUPERIOR),
+  CHOMBA(Categoria.PARTE_SUPERIOR),
   PANTALON(Categoria.PARTE_INFERIOR),
   SHORT(Categoria.PARTE_INFERIOR),
   POLLERA(Categoria.PARTE_INFERIOR),

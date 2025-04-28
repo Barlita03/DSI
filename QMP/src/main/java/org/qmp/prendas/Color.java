@@ -1,4 +1,4 @@
-package org.qmp;
+package org.qmp.prendas;
 
 import java.util.List;
 
