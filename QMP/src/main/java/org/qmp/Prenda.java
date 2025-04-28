@@ -1,51 +1,53 @@
 package org.qmp;
 
+import org.qmp.exceptions.NonModificableObject;
 import org.qmp.exceptions.NullParamException;
 
 public class Prenda {
-  private TipoDePrenda tipoDePrenda;
+  private final TipoDePrenda tipoDePrenda;
   private Material material;
+  private Trama trama = Trama.LISA;
   private Color colorPrincipal;
-  private Color colorSecundario = null;
+  private Color colorSecundario;
 
+  // Constructor
   public Prenda(TipoDePrenda tipoDePrenda,
                  Material material,
+                 Trama trama,
                  Color colorPrincipal,
                  Color colorSecundario) {
     this.tipoDePrenda = tipoDePrenda;
     this.material = material;
+    this.trama = trama;
     this.colorPrincipal = colorPrincipal;
     this.colorSecundario = colorSecundario;
-
-    this.verificarTipos();
   }
 
   public Prenda(TipoDePrenda tipoDePrenda,
-                 Material material,
-                 Color colorPrincipal) {
+                Material material,
+                Trama trama,
+                Color colorPrincipal) {
     this.tipoDePrenda = tipoDePrenda;
     this.material = material;
+    this.trama = trama;
     this.colorPrincipal = colorPrincipal;
-
-    this.verificarTipos();
   }
 
-  private void verificarTipos() {
-    if (this.tipoDePrenda == null) {
-      throw new NullParamException("El tipo de prenda no puede ser nulo");
-    } else if (this.material == null) {
-      throw new NullParamException("El material no puede ser nulo");
-    } else if (this.colorPrincipal == null) {
-      throw new NullParamException("El color principal no puede ser nulo");
-    }
-  }
-
+  // Getters
   public Categoria categoria() {
     return this.tipoDePrenda.getCategoria();
   }
 
   public TipoDePrenda getTipo() {
     return this.tipoDePrenda;
+  }
+
+  public Material getMaterial() {
+    return this.material;
+  }
+
+  public Trama getTrama() {
+    return this.trama;
   }
 
   public Color getColorPrincipal() {
