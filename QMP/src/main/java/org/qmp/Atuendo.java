@@ -1,5 +1,6 @@
 package org.qmp;
 
+import org.qmp.prendas.Formalidad;
 import org.qmp.prendas.Prenda;
 
 public class Atuendo {
@@ -27,5 +28,13 @@ public class Atuendo {
 
   public Prenda getCalzado() {
     return calzado;
+  }
+
+  // --- Metodos ---
+
+  public boolean esFormal() {
+    return parteSuperior.getFormalidad() == Formalidad.FORMAL
+        && parteInferior.getFormalidad() == Formalidad.FORMAL
+        && calzado.getFormalidad() == Formalidad.FORMAL;
   }
 }

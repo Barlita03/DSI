@@ -6,13 +6,15 @@ import org.qmp.prendas.Prenda;
 import org.qmp.sugeridores.Sugeridor;
 
 public class Usuario {
-  List<Prenda> prendas = new ArrayList<>();
-  int edad;
+  private Sugeridor sugeridor;
+  private List<Prenda> prendas = new ArrayList<>();
+  private int edad;
 
   // --- Constructor ---
 
-  public Usuario(int edad, List<Prenda> prendas) {
+  public Usuario(int edad, Sugeridor sugeridor, List<Prenda> prendas) {
     this.prendas = new ArrayList<Prenda>(prendas);
+    this.sugeridor = sugeridor;
     this.edad = edad;
   }
 
@@ -40,8 +42,8 @@ public class Usuario {
 
   // --- Metodos ---
 
-  public List<Atuendo> generarSugerencias(Sugeridor sugeridor) {
-    return sugeridor.generarSugerencias(this);
+  public List<Atuendo> generarSugerencias() {
+    return this.sugeridor.generarSugerencias(this);
   }
 
   public void adquirirPrenda(Prenda prenda) {
@@ -50,5 +52,11 @@ public class Usuario {
 
   public void desecharPrenda(Prenda prenda) {
     prendas.remove(prenda);
+  }
+
+  // --- Setters ---
+
+  public void setSugeridor(Sugeridor sugeridor) {
+    this.sugeridor = sugeridor;
   }
 }
