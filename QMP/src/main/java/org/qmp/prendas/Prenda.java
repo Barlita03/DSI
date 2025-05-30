@@ -1,12 +1,7 @@
 package org.qmp.prendas;
 
-import org.qmp.materiales.Color;
-import org.qmp.materiales.Material;
-import org.qmp.materiales.Trama;
-
 public class Prenda {
   private final TipoDePrenda tipoDePrenda;
-  private final Formalidad formalidad;
   private Material material;
   private Trama trama = Trama.LISA;
   private Color colorPrincipal;
@@ -14,13 +9,11 @@ public class Prenda {
 
   // Constructor
   public Prenda(TipoDePrenda tipoDePrenda,
-                Formalidad formalidad,
-                Material material,
-                Trama trama,
-                Color colorPrincipal,
-                Color colorSecundario) {
+                 Material material,
+                 Trama trama,
+                 Color colorPrincipal,
+                 Color colorSecundario) {
     this.tipoDePrenda = tipoDePrenda;
-    this.formalidad = formalidad;
     this.material = material;
     this.trama = trama;
     this.colorPrincipal = colorPrincipal;
@@ -28,12 +21,10 @@ public class Prenda {
   }
 
   public Prenda(TipoDePrenda tipoDePrenda,
-                Formalidad formalidad,
                 Material material,
                 Trama trama,
                 Color colorPrincipal) {
     this.tipoDePrenda = tipoDePrenda;
-    this.formalidad = formalidad;
     this.material = material;
     this.trama = trama;
     this.colorPrincipal = colorPrincipal;

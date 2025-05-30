@@ -1,6 +1,6 @@
-package org.qmp.materiales;
+package org.qmp.prendas;
 
-public enum TipoDeMaterial {
+public enum Material {
   TELA_ALGODON,
   TELA_LYCRA,
   TELA_JEAN,
@@ -8,5 +8,7 @@ public enum TipoDeMaterial {
   PLASTICO,
   ORO,
   PLATA,
-  ACERO
+  ACERO,
+  PIQUE,
+  ACETATO
 }

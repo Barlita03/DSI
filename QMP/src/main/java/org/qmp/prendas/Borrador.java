@@ -23,18 +23,22 @@ public class Borrador {
   }
 
   public void setMaterial(Material material) {
+    this.verificarParametroNoNulo(material);
     this.material = material;
   }
 
   public void setTrama(Trama trama) {
+    this.verificarParametroNoNulo(material);
     this.trama = trama;
   }
 
   public void setColorPrincipal(Color color) {
+    this.verificarParametroNoNulo(material);
     this.colorPrincipal = color;
   }
 
   public void setColorSecundario(Color color) {
+    this.verificarParametroNoNulo(material);
     this.colorSecundario = color;
   }
 
@@ -48,6 +52,12 @@ public class Borrador {
   public void verificarSiLaPrendaEsValida() {
     if (!this.prendaValida()) {
       throw new InvalidPrenda("Esta prenda no tiene completo alguno/s de sus atributos");
+    }
+  }
+
+  public void verificarParametroNoNulo(Object object) {
+    if (object == null) {
+      throw new NullPointerException("Los atributos no pueden ser nulos");
     }
   }
 
