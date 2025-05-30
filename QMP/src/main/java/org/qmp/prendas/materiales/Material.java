@@ -1,4 +1,4 @@
-package org.qmp.prendas;
+package org.qmp.prendas.materiales;
 
 public enum Material {
   TELA_ALGODON,

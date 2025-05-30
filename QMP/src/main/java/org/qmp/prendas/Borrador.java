@@ -1,9 +1,9 @@
 package org.qmp.prendas;
 
-import org.qmp.materiales.Color;
-import org.qmp.materiales.Material;
-import org.qmp.materiales.Trama;
 import org.qmp.exceptions.InvalidPrenda;
+import org.qmp.prendas.materiales.Color;
+import org.qmp.prendas.materiales.Material;
+import org.qmp.prendas.materiales.Trama;
 
 public class Borrador {
   private final TipoDePrenda tipoDePrenda;
@@ -44,9 +44,7 @@ public class Borrador {
 
   // Validaciones
   public boolean prendaValida() {
-    return this.material != null
-           && this.colorPrincipal != null
-           && this.trama != null;
+    return this.material != null && this.colorPrincipal != null && this.trama != null;
   }
 
   public void verificarSiLaPrendaEsValida() {

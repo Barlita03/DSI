@@ -1,7 +1,5 @@
 package org.qmp;
 
-import org.qmp.prendas.Prenda;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.qmp.prendas.Prenda;
