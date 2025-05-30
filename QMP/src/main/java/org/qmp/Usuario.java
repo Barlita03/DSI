@@ -7,13 +7,25 @@ import org.qmp.sugeridores.Sugeridor;
 
 public class Usuario {
   private Sugeridor sugeridor;
-  private List<Prenda> prendas = new ArrayList<>();
+  private List<Prenda> prendas;
   private int edad;
 
   // --- Constructor ---
 
   public Usuario(int edad, Sugeridor sugeridor, List<Prenda> prendas) {
     this.prendas = new ArrayList<Prenda>(prendas);
+    this.sugeridor = sugeridor;
+    this.edad = edad;
+  }
+
+  public Usuario(int edad, Sugeridor sugeridor, Prenda... prendas) {
+    this.prendas = new ArrayList<Prenda>(List.of(prendas));
+    this.sugeridor = sugeridor;
+    this.edad = edad;
+  }
+
+  public Usuario(int edad, Sugeridor sugeridor) {
+    this.prendas = new ArrayList<>();
     this.sugeridor = sugeridor;
     this.edad = edad;
   }
