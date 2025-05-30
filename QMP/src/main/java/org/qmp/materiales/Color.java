@@ -1,4 +1,4 @@
-package org.qmp;
+package org.qmp.materiales;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package org.qmp;
 
+import org.qmp.prendas.Prenda;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,8 @@ public class Guardarropas {
     this.prendas = new ArrayList<Prenda>(prendas);
   }
 
-  public List<Prenda> crearAtuendo() {
+  public List<Prenda> crearAtuendo(Sugeridor sugeridor) {
+
     // TODO
     return null;
   }

@@ -1,4 +1,4 @@
-package org.qmp.exceptions;
+package org.qmp.prendas;
 
 public enum Formalidad {
   FORMAL,

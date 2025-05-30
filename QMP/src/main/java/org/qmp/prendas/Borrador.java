@@ -1,10 +1,14 @@
-package org.qmp;
+package org.qmp.prendas;
 
+import org.qmp.materiales.Color;
+import org.qmp.materiales.Material;
+import org.qmp.materiales.Trama;
 import org.qmp.exceptions.InvalidPrenda;
 
 public class Borrador {
   private final TipoDePrenda tipoDePrenda;
   private Material material = null;
+  private Formalidad formalidad = null;
   private Trama trama = Trama.LISA;
   private Color colorPrincipal = null;
   private Color colorSecundario = null;
@@ -14,6 +18,10 @@ public class Borrador {
   }
 
   // Setters
+  public void setFormalidad(Formalidad formalidad) {
+    this.formalidad = formalidad;
+  }
+
   public void setMaterial(Material material) {
     this.material = material;
   }
@@ -46,6 +54,6 @@ public class Borrador {
   // Otros
   public Prenda crearPrenda() {
     verificarSiLaPrendaEsValida();
-    return new Prenda(tipoDePrenda, material, trama, colorPrincipal, colorSecundario);
+    return new Prenda(tipoDePrenda, formalidad, material, trama, colorPrincipal, colorSecundario);
   }
 }

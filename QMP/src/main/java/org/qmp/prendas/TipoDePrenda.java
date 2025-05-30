@@ -1,4 +1,4 @@
-package org.qmp;
+package org.qmp.prendas;
 
 public enum TipoDePrenda {
   REMERA(Categoria.PARTE_SUPERIOR),

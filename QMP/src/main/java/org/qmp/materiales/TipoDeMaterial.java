@@ -1,6 +1,4 @@
-package org.qmp;
-
-import org.qmp.exceptions.NotTramaException;
+package org.qmp.materiales;
 
 public enum TipoDeMaterial {
   TELA_ALGODON,

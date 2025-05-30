@@ -1,4 +1,4 @@
-package org.qmp;
+package org.qmp.materiales;
 
 public enum Trama {
   LISA,
