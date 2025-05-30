@@ -12,7 +12,7 @@ public class Prenda {
   private Color colorPrincipal;
   private Color colorSecundario;
 
-  // Constructor
+  // --- Constructor ---
   public Prenda(
       TipoDePrenda tipoDePrenda,
       Formalidad formalidad,
@@ -41,7 +41,8 @@ public class Prenda {
     this.colorPrincipal = colorPrincipal;
   }
 
-  // Getters
+  // --- Getters ---
+
   public Categoria categoria() {
     return this.tipoDePrenda.getCategoria();
   }
@@ -68,5 +69,19 @@ public class Prenda {
 
   public Color getColorSecundario() {
     return this.colorSecundario;
+  }
+
+  // --- Metodos ---
+
+  public boolean esSuperior() {
+    return this.tipoDePrenda.getCategoria() == Categoria.PARTE_SUPERIOR;
+  }
+
+  public boolean esInferior() {
+    return this.tipoDePrenda.getCategoria() == Categoria.PARTE_INFERIOR;
+  }
+
+  public boolean esCalzado() {
+    return this.tipoDePrenda.getCategoria() == Categoria.CALZADO;
   }
 }
