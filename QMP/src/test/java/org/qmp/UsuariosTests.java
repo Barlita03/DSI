@@ -3,8 +3,11 @@ package org.qmp;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Duration;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.qmp.apis.AccuWeatherApi;
+import org.qmp.apis.accuweather.ServicioMeteorologicoAccuWeather;
 import org.qmp.prendas.Formalidad;
 import org.qmp.prendas.Prenda;
 import org.qmp.prendas.TipoDePrenda;
@@ -32,6 +35,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -39,6 +43,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -54,6 +59,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -61,6 +67,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -68,6 +75,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.ZAPATILLA,
             Formalidad.INFORMAL,
+            20,
             Material.CUERO,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -87,6 +95,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -94,6 +103,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -113,6 +123,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -120,6 +131,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -127,6 +139,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.ZAPATILLA,
             Formalidad.INFORMAL,
+            20,
             Material.CUERO,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -134,6 +147,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.FORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(255, 255, 255));
@@ -141,6 +155,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.FORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -148,6 +163,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.ZAPATILLA,
             Formalidad.FORMAL,
+            20,
             Material.CUERO,
             Trama.LISA,
             new Color(255, 255, 255));
@@ -165,6 +181,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -172,6 +189,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -179,6 +197,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.ZAPATILLA,
             Formalidad.INFORMAL,
+            20,
             Material.CUERO,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -186,6 +205,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.FORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(255, 255, 255));
@@ -193,6 +213,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.FORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -200,6 +221,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.ZAPATILLA,
             Formalidad.FORMAL,
+            20,
             Material.CUERO,
             Trama.LISA,
             new Color(255, 255, 255));
@@ -217,6 +239,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -224,6 +247,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.INFORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -231,6 +255,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.ZAPATILLA,
             Formalidad.INFORMAL,
+            20,
             Material.CUERO,
             Trama.LISA,
             new Color(0, 0, 100));
@@ -238,6 +263,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.REMERA,
             Formalidad.FORMAL,
+            20,
             Material.TELA_ALGODON,
             Trama.LISA,
             new Color(255, 255, 255));
@@ -245,6 +271,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.PANTALON,
             Formalidad.FORMAL,
+            20,
             Material.TELA_JEAN,
             Trama.LISA,
             new Color(0, 0, 0));
@@ -252,6 +279,7 @@ public class UsuariosTests {
         new Prenda(
             TipoDePrenda.ZAPATILLA,
             Formalidad.FORMAL,
+            20,
             Material.CUERO,
             Trama.LISA,
             new Color(255, 255, 255));
@@ -265,5 +293,14 @@ public class UsuariosTests {
     assertEquals(1, sugerencias.size());
 
     assertTrue(sugerencias.stream().allMatch(Atuendo::esFormal));
+  }
+
+  @Test
+  void condicionClimatica() {
+    ServicioMeteorologicoAccuWeather servicioMeteorologicoAccuWeather =
+        new ServicioMeteorologicoAccuWeather(new AccuWeatherApi(), Duration.ofDays(1));
+
+    assertEquals(
+        13, servicioMeteorologicoAccuWeather.getTemperaturaEnCelsius("Buenos Aires, Argentina"));
   }
 }

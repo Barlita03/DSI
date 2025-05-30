@@ -48,8 +48,18 @@ public class Usuario {
     return new ArrayList<Prenda>(this.prendas.stream().filter(Prenda::esCalzado).toList());
   }
 
+  public List<Prenda> getAccesorios() {
+    return new ArrayList<Prenda>(this.prendas.stream().filter(Prenda::esAccesorio).toList());
+  }
+
   public int getEdad() {
     return this.edad;
+  }
+
+  // --- Setters ---
+
+  public void setSugeridor(Sugeridor sugeridor) {
+    this.sugeridor = sugeridor;
   }
 
   // --- Metodos ---
@@ -64,11 +74,5 @@ public class Usuario {
 
   public void desecharPrenda(Prenda prenda) {
     prendas.remove(prenda);
-  }
-
-  // --- Setters ---
-
-  public void setSugeridor(Sugeridor sugeridor) {
-    this.sugeridor = sugeridor;
   }
 }

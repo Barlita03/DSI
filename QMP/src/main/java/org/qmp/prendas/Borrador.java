@@ -7,8 +7,9 @@ import org.qmp.prendas.materiales.Trama;
 
 public class Borrador {
   private final TipoDePrenda tipoDePrenda;
-  private Material material = null;
   private Formalidad formalidad = null;
+  private int temperaturaMaxima;
+  private Material material = null;
   private Trama trama = Trama.LISA;
   private Color colorPrincipal = null;
   private Color colorSecundario = null;
@@ -20,6 +21,10 @@ public class Borrador {
   // Setters
   public void setFormalidad(Formalidad formalidad) {
     this.formalidad = formalidad;
+  }
+
+  public void setTemperaturaMaxima(int temperaturaMaxima) {
+    this.temperaturaMaxima = temperaturaMaxima;
   }
 
   public void setMaterial(Material material) {
@@ -62,6 +67,13 @@ public class Borrador {
   // Otros
   public Prenda crearPrenda() {
     verificarSiLaPrendaEsValida();
-    return new Prenda(tipoDePrenda, formalidad, material, trama, colorPrincipal, colorSecundario);
+    return new Prenda(
+        tipoDePrenda,
+        formalidad,
+        temperaturaMaxima,
+        material,
+        trama,
+        colorPrincipal,
+        colorSecundario);
   }
 }

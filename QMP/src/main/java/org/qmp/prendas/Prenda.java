@@ -7,6 +7,7 @@ import org.qmp.prendas.materiales.Trama;
 public class Prenda {
   private final TipoDePrenda tipoDePrenda;
   private Formalidad formalidad;
+  private int temperaturaMaxima;
   private Material material;
   private Trama trama = Trama.LISA;
   private Color colorPrincipal;
@@ -16,6 +17,7 @@ public class Prenda {
   public Prenda(
       TipoDePrenda tipoDePrenda,
       Formalidad formalidad,
+      int temperaturaMaxima,
       Material material,
       Trama trama,
       Color colorPrincipal,
@@ -31,6 +33,7 @@ public class Prenda {
   public Prenda(
       TipoDePrenda tipoDePrenda,
       Formalidad formalidad,
+      int temperaturaMaxima,
       Material material,
       Trama trama,
       Color colorPrincipal) {
@@ -83,5 +86,13 @@ public class Prenda {
 
   public boolean esCalzado() {
     return this.tipoDePrenda.getCategoria() == Categoria.CALZADO;
+  }
+
+  public boolean esAccesorio() {
+    return this.tipoDePrenda.getCategoria() == Categoria.ACCESORIO;
+  }
+
+  public boolean aptaParaTemperatura(int temperatura) {
+    return temperatura <= temperaturaMaxima;
   }
 }
