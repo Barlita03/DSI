@@ -1,0 +1,60 @@
+package org.primerParcial;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Transmision {
+  private String titulo;
+  private Canal autor;
+  private List<String> categorias = new ArrayList<>();
+  private List<Canal> espectadores = new ArrayList<>();
+  private int maximoParticipantes = 0;
+  private LocalDateTime fechaInicio = null;
+  private LocalDateTime fechaFin = null;
+  private final List<Mensaje> chat = new ArrayList<>();
+
+  // --- Constructor ---
+
+  public Transmision (Canal autor, String titulo, String... categorias) {
+    if(autor != null) {
+      this.autor = autor;
+    } else {
+      throw new RuntimeException("El autor no puede ser null");
+    }
+
+    if(titulo != null) {
+      this.titulo = titulo;
+    } else {
+      throw new RuntimeException("El titulo no puede ser null");
+    }
+
+    this.categorias.addAll(List.of(categorias));
+  }
+
+  // --- Metodos ---
+
+  public void recibirMensaje(Canal canal, String contenido) {
+    chat.add(new Mensaje(canal, contenido));
+  }
+
+  public void serIniciada() {
+    this.fechaInicio = LocalDateTime.now();
+    TransmisionesEnCurso.agregarTransmision(this);
+  }
+
+  public void serFinalizada() {
+    this.fechaFin = LocalDateTime.now();
+    TransmisionesEnCurso.eliminarTransmision(this);
+    espectadores.clear();
+    autor.agregarAlHistorico(this);
+  }
+
+  public void agregarVisualizador(Canal canal) {
+    espectadores.add(canal);
+
+    if(espectadores.size() > maximoParticipantes) {
+      maximoParticipantes = espectadores.size();
+    }
+  }
+}
