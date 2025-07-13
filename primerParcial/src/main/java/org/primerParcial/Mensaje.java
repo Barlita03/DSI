@@ -10,14 +10,14 @@ public class Mensaje {
   // --- Constructor ---
 
   public Mensaje(Canal autor, String contenido) {
-    if(autor != null) {
+    if (autor != null) {
       this.autor = autor;
     } else {
       throw new RuntimeException("El autor no puede ser null");
     }
 
-    if(contenido != null) {
-      if(!contenido.trim().isEmpty()) {
+    if (contenido != null) {
+      if (!contenido.trim().isEmpty()) {
         this.contenido = contenido;
       } else {
         throw new RuntimeException("El contenido no puede estar vacio");
@@ -27,5 +27,19 @@ public class Mensaje {
     }
 
     this.fecha = LocalDateTime.now();
+  }
+
+  // --- Getters ---
+
+  public String getContenido() {
+    return contenido;
+  }
+
+  public Canal getAutor() {
+    return autor;
+  }
+
+  public LocalDateTime getFecha() {
+    return fecha;
   }
 }

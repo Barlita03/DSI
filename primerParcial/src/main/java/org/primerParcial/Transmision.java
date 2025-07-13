@@ -16,14 +16,14 @@ public class Transmision {
 
   // --- Constructor ---
 
-  public Transmision (Canal autor, String titulo, String... categorias) {
-    if(autor != null) {
+  public Transmision(Canal autor, String titulo, String... categorias) {
+    if (autor != null) {
       this.autor = autor;
     } else {
       throw new RuntimeException("El autor no puede ser null");
     }
 
-    if(titulo != null) {
+    if (titulo != null) {
       this.titulo = titulo;
     } else {
       throw new RuntimeException("El titulo no puede ser null");
@@ -53,8 +53,30 @@ public class Transmision {
   public void agregarVisualizador(Canal canal) {
     espectadores.add(canal);
 
-    if(espectadores.size() > maximoParticipantes) {
+    if (espectadores.size() > maximoParticipantes) {
       maximoParticipantes = espectadores.size();
     }
+  }
+
+  // --- Getters ---
+
+  public LocalDateTime getInicio() {
+    return fechaInicio;
+  }
+
+  public LocalDateTime getFin() {
+    return fechaFin;
+  }
+
+  public List<Canal> getEspectadores() {
+    return new ArrayList<>(espectadores);
+  }
+
+  public List<Mensaje> getChat() {
+    return new ArrayList<>(chat);
+  }
+
+  public String getTitulo() {
+    return titulo;
   }
 }

@@ -12,11 +12,19 @@ public class TransmisionesEnCurso {
     return instancia;
   }
 
+  public List<Transmision> getTransmisiones() {
+    return new ArrayList<>(transmisiones);
+  }
+
   public static void agregarTransmision(Transmision transmision) {
     transmisiones.add(transmision);
   }
 
   public static void eliminarTransmision(Transmision transmision) {
     transmisiones.remove(transmision);
+  }
+
+  public static void limpiarLista() {
+    transmisiones.clear();
   }
 }
