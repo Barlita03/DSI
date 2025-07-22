@@ -1,9 +1,7 @@
-package org.qmp;
+package org.qmp.prendas;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.qmp.prendas.Formalidad;
-import org.qmp.prendas.Prenda;
 
 public class Atuendo {
   private final Prenda parteSuperior;

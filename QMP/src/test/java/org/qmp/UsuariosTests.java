@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.qmp.apis.AccuWeatherApi;
 import org.qmp.apis.accuweather.ServicioMeteorologicoAccuWeather;
+import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Formalidad;
 import org.qmp.prendas.Prenda;
 import org.qmp.prendas.TipoDePrenda;
@@ -49,10 +51,11 @@ public class UsuariosTests {
             new Color(0, 0, 100));
 
     Usuario usuario = new Usuario(21, sugeridorBasico);
-    Guardarropa guardarropa = new Guardarropa();
+    List<Usuario> usuarios = new ArrayList<>();
+    usuarios.add(usuario);
+    Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
     guardarropa.agregarPrenda(remera);
     guardarropa.agregarPrenda(pantalon);
-    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(2, usuario.getPrendas().size());
   }
@@ -85,10 +88,11 @@ public class UsuariosTests {
             new Color(0, 0, 0));
 
     Usuario usuario = new Usuario(21, sugeridorBasico);
-    Guardarropa guardarropa = new Guardarropa();
+    List<Usuario> usuarios = new ArrayList<>();
+    usuarios.add(usuario);
+    Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
     guardarropa.agregarPrenda(remera);
     guardarropa.agregarPrenda(pantalon);
-    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(2, usuario.getPrendas().size());
 
@@ -117,10 +121,11 @@ public class UsuariosTests {
             new Color(0, 0, 100));
 
     Usuario usuario = new Usuario(21, sugeridorBasico);
-    Guardarropa guardarropa = new Guardarropa();
+    List<Usuario> usuarios = new ArrayList<>();
+    usuarios.add(usuario);
+    Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
     guardarropa.agregarPrenda(remera);
     guardarropa.agregarPrenda(pantalon);
-    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(2, usuario.getPrendas().size());
 
@@ -181,14 +186,15 @@ public class UsuariosTests {
             new Color(255, 255, 255));
 
     Usuario usuario = new Usuario(21, sugeridorBasico);
-    Guardarropa guardarropa = new Guardarropa();
+    List<Usuario> usuarios = new ArrayList<>();
+    usuarios.add(usuario);
+    Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
     guardarropa.agregarPrenda(remera1);
     guardarropa.agregarPrenda(pantalon1);
     guardarropa.agregarPrenda(calzado1);
     guardarropa.agregarPrenda(remera2);
     guardarropa.agregarPrenda(pantalon2);
     guardarropa.agregarPrenda(calzado2);
-    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(8, usuario.generarSugerencias().size());
   }
@@ -245,14 +251,15 @@ public class UsuariosTests {
             new Color(255, 255, 255));
 
     Usuario usuario = new Usuario(21, sugeridorPorFormalidad);
-    Guardarropa guardarropa = new Guardarropa();
+    List<Usuario> usuarios = new ArrayList<>();
+    usuarios.add(usuario);
+    Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
     guardarropa.agregarPrenda(remera1);
     guardarropa.agregarPrenda(pantalon1);
     guardarropa.agregarPrenda(calzado1);
     guardarropa.agregarPrenda(remera2);
     guardarropa.agregarPrenda(pantalon2);
     guardarropa.agregarPrenda(calzado2);
-    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(8, usuario.generarSugerencias().size());
   }
@@ -309,14 +316,15 @@ public class UsuariosTests {
             new Color(255, 255, 255));
 
     Usuario usuario = new Usuario(60, sugeridorPorFormalidad);
-    Guardarropa guardarropa = new Guardarropa();
+    List<Usuario> usuarios = new ArrayList<>();
+    usuarios.add(usuario);
+    Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
     guardarropa.agregarPrenda(remera1);
     guardarropa.agregarPrenda(pantalon1);
     guardarropa.agregarPrenda(calzado1);
     guardarropa.agregarPrenda(remera2);
     guardarropa.agregarPrenda(pantalon2);
     guardarropa.agregarPrenda(calzado2);
-    usuario.agregarGuardarropa(guardarropa);
 
     List<Atuendo> sugerencias = usuario.generarSugerencias();
 

@@ -2,6 +2,8 @@ package org.qmp;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.qmp.operaciones.Sugerencia;
+import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Prenda;
 import org.qmp.sugeridores.Sugeridor;
 
@@ -43,12 +45,12 @@ public class Usuario {
     return this.edad;
   }
 
-  public void agregarGuardarropa(Guardarropa guardarropa) {
-    guardarropas.add(guardarropa);
+  public List<Sugerencia> getSugerenciasPendientes() {
+    return guardarropas.stream().flatMap(g -> g.getSugerenciasPendientes().stream()).toList();
   }
 
-  public void eliminarGuardarropa(Guardarropa guardarropa) {
-    guardarropas.remove(guardarropa);
+  public List<Sugerencia> getSugerenciasProcesadas() {
+    return guardarropas.stream().flatMap(g -> g.getSugerenciasProcesadas().stream()).toList();
   }
 
   // --- Setters ---
@@ -61,5 +63,13 @@ public class Usuario {
 
   public List<Atuendo> generarSugerencias() {
     return this.sugeridor.generarSugerencias(this);
+  }
+
+  public void agregarGuardarropa(Guardarropa guardarropa) {
+    guardarropas.add(guardarropa);
+  }
+
+  public void eliminarGuardarropa(Guardarropa guardarropa) {
+    guardarropas.remove(guardarropa);
   }
 }

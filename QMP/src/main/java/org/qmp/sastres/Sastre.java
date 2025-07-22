@@ -1,6 +1,6 @@
 package org.qmp.sastres;
 
-import org.qmp.Atuendo;
+import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Prenda;
 
 public abstract class Sastre {
