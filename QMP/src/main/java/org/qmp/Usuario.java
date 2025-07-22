@@ -7,25 +7,12 @@ import org.qmp.sugeridores.Sugeridor;
 
 public class Usuario {
   private Sugeridor sugeridor;
-  private List<Prenda> prendas;
-  private int edad;
+  private final List<Guardarropa> guardarropas = new ArrayList<>();
+  private final int edad;
 
   // --- Constructor ---
 
-  public Usuario(int edad, Sugeridor sugeridor, List<Prenda> prendas) {
-    this.prendas = new ArrayList<Prenda>(prendas);
-    this.sugeridor = sugeridor;
-    this.edad = edad;
-  }
-
-  public Usuario(int edad, Sugeridor sugeridor, Prenda... prendas) {
-    this.prendas = new ArrayList<Prenda>(List.of(prendas));
-    this.sugeridor = sugeridor;
-    this.edad = edad;
-  }
-
   public Usuario(int edad, Sugeridor sugeridor) {
-    this.prendas = new ArrayList<>();
     this.sugeridor = sugeridor;
     this.edad = edad;
   }
@@ -33,27 +20,35 @@ public class Usuario {
   // --- Getters ----
 
   public List<Prenda> getPrendas() {
-    return new ArrayList<Prenda>(this.prendas);
+    return guardarropas.stream().flatMap(g -> g.getPrendas().stream()).toList();
   }
 
   public List<Prenda> getPrendasSuperiores() {
-    return new ArrayList<Prenda>(this.prendas.stream().filter(Prenda::esSuperior).toList());
+    return guardarropas.stream().flatMap(g -> g.getPrendasSuperiores().stream()).toList();
   }
 
   public List<Prenda> getPrendasInferiores() {
-    return new ArrayList<Prenda>(this.prendas.stream().filter(Prenda::esInferior).toList());
+    return guardarropas.stream().flatMap(g -> g.getPrendasInferiores().stream()).toList();
   }
 
   public List<Prenda> getCalzados() {
-    return new ArrayList<Prenda>(this.prendas.stream().filter(Prenda::esCalzado).toList());
+    return guardarropas.stream().flatMap(g -> g.getCalzados().stream()).toList();
   }
 
   public List<Prenda> getAccesorios() {
-    return new ArrayList<Prenda>(this.prendas.stream().filter(Prenda::esAccesorio).toList());
+    return guardarropas.stream().flatMap(g -> g.getAccesorios().stream()).toList();
   }
 
   public int getEdad() {
     return this.edad;
+  }
+
+  public void agregarGuardarropa(Guardarropa guardarropa) {
+    guardarropas.add(guardarropa);
+  }
+
+  public void eliminarGuardarropa(Guardarropa guardarropa) {
+    guardarropas.remove(guardarropa);
   }
 
   // --- Setters ---
@@ -66,13 +61,5 @@ public class Usuario {
 
   public List<Atuendo> generarSugerencias() {
     return this.sugeridor.generarSugerencias(this);
-  }
-
-  public void adquirirPrenda(Prenda prenda) {
-    prendas.add(prenda);
-  }
-
-  public void desecharPrenda(Prenda prenda) {
-    prendas.remove(prenda);
   }
 }

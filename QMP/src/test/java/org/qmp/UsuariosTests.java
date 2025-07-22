@@ -48,7 +48,11 @@ public class UsuariosTests {
             Trama.LISA,
             new Color(0, 0, 100));
 
-    Usuario usuario = new Usuario(21, sugeridorBasico, remera, pantalon);
+    Usuario usuario = new Usuario(21, sugeridorBasico);
+    Guardarropa guardarropa = new Guardarropa();
+    guardarropa.agregarPrenda(remera);
+    guardarropa.agregarPrenda(pantalon);
+    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(2, usuario.getPrendas().size());
   }
@@ -80,11 +84,15 @@ public class UsuariosTests {
             Trama.LISA,
             new Color(0, 0, 0));
 
-    Usuario usuario = new Usuario(21, sugeridorBasico, remera, pantalon);
+    Usuario usuario = new Usuario(21, sugeridorBasico);
+    Guardarropa guardarropa = new Guardarropa();
+    guardarropa.agregarPrenda(remera);
+    guardarropa.agregarPrenda(pantalon);
+    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(2, usuario.getPrendas().size());
 
-    usuario.adquirirPrenda(zapatilla);
+    guardarropa.agregarPrenda(zapatilla);
 
     assertEquals(3, usuario.getPrendas().size());
   }
@@ -108,11 +116,15 @@ public class UsuariosTests {
             Trama.LISA,
             new Color(0, 0, 100));
 
-    Usuario usuario = new Usuario(21, sugeridorBasico, remera, pantalon);
+    Usuario usuario = new Usuario(21, sugeridorBasico);
+    Guardarropa guardarropa = new Guardarropa();
+    guardarropa.agregarPrenda(remera);
+    guardarropa.agregarPrenda(pantalon);
+    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(2, usuario.getPrendas().size());
 
-    usuario.desecharPrenda(remera);
+    guardarropa.quitarPrenda(remera);
 
     assertEquals(1, usuario.getPrendas().size());
   }
@@ -168,9 +180,15 @@ public class UsuariosTests {
             Trama.LISA,
             new Color(255, 255, 255));
 
-    Usuario usuario =
-        new Usuario(
-            21, sugeridorBasico, remera1, pantalon1, calzado1, remera2, pantalon2, calzado2);
+    Usuario usuario = new Usuario(21, sugeridorBasico);
+    Guardarropa guardarropa = new Guardarropa();
+    guardarropa.agregarPrenda(remera1);
+    guardarropa.agregarPrenda(pantalon1);
+    guardarropa.agregarPrenda(calzado1);
+    guardarropa.agregarPrenda(remera2);
+    guardarropa.agregarPrenda(pantalon2);
+    guardarropa.agregarPrenda(calzado2);
+    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(8, usuario.generarSugerencias().size());
   }
@@ -226,9 +244,15 @@ public class UsuariosTests {
             Trama.LISA,
             new Color(255, 255, 255));
 
-    Usuario usuario =
-        new Usuario(
-            21, sugeridorPorFormalidad, remera1, pantalon1, calzado1, remera2, pantalon2, calzado2);
+    Usuario usuario = new Usuario(21, sugeridorPorFormalidad);
+    Guardarropa guardarropa = new Guardarropa();
+    guardarropa.agregarPrenda(remera1);
+    guardarropa.agregarPrenda(pantalon1);
+    guardarropa.agregarPrenda(calzado1);
+    guardarropa.agregarPrenda(remera2);
+    guardarropa.agregarPrenda(pantalon2);
+    guardarropa.agregarPrenda(calzado2);
+    usuario.agregarGuardarropa(guardarropa);
 
     assertEquals(8, usuario.generarSugerencias().size());
   }
@@ -284,9 +308,15 @@ public class UsuariosTests {
             Trama.LISA,
             new Color(255, 255, 255));
 
-    Usuario usuario =
-        new Usuario(
-            60, sugeridorPorFormalidad, remera1, pantalon1, calzado1, remera2, pantalon2, calzado2);
+    Usuario usuario = new Usuario(60, sugeridorPorFormalidad);
+    Guardarropa guardarropa = new Guardarropa();
+    guardarropa.agregarPrenda(remera1);
+    guardarropa.agregarPrenda(pantalon1);
+    guardarropa.agregarPrenda(calzado1);
+    guardarropa.agregarPrenda(remera2);
+    guardarropa.agregarPrenda(pantalon2);
+    guardarropa.agregarPrenda(calzado2);
+    usuario.agregarGuardarropa(guardarropa);
 
     List<Atuendo> sugerencias = usuario.generarSugerencias();
 
