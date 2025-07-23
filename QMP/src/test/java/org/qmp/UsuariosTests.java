@@ -3,12 +3,9 @@ package org.qmp;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.qmp.apis.AccuWeatherApi;
-import org.qmp.apis.accuweather.ServicioMeteorologicoAccuWeather;
 import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Formalidad;
 import org.qmp.prendas.Prenda;

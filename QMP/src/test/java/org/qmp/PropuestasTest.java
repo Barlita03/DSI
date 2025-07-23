@@ -1,23 +1,21 @@
 package org.qmp;
 
-import org.junit.jupiter.api.BeforeAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.qmp.operaciones.AgregarPrenda;
-import org.qmp.operaciones.Propuesta;
-import org.qmp.operaciones.QuitarPrenda;
 import org.qmp.prendas.Formalidad;
 import org.qmp.prendas.Prenda;
 import org.qmp.prendas.TipoDePrenda;
 import org.qmp.prendas.materiales.Color;
 import org.qmp.prendas.materiales.Material;
 import org.qmp.prendas.materiales.Trama;
+import org.qmp.propuestas.AgregarPrenda;
+import org.qmp.propuestas.Propuesta;
+import org.qmp.propuestas.QuitarPrenda;
 import org.qmp.sugeridores.Sugeridor;
 import org.qmp.sugeridores.SugeridorBasico;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PropuestasTest {
   Sugeridor sugeridor = new SugeridorBasico();
@@ -45,8 +43,7 @@ public class PropuestasTest {
   @BeforeEach
   void setup() {
     guardarropa.limpiarListaPrendas();
-    guardarropa.limpiarListaPropuestasPendientes();
-    guardarropa.limpiarListaPropuestasProcesadas();
+    guardarropa.limpiarListaPropuestas();
 
     guardarropa.agregarPrenda(prenda1);
   }
@@ -59,14 +56,14 @@ public class PropuestasTest {
   }
 
   @Test
-  void unUsuarioPuedeListarLasPropuestasPendientes() {
+  void unUsuarioPuedeListarLasPropuestas() {
     new QuitarPrenda(guardarropa, prenda1);
 
     assertEquals(1, usuario.getPropuestasPendientes().size());
   }
 
   @Test
-  void unUsuarioPuedeListarLasPropuestasProcesadas() {
+  void unUsuarioPuedeListarLasOperaciones() {
     Propuesta propuesta = new QuitarPrenda(guardarropa, prenda1);
 
     propuesta.serAceptada();

@@ -1,4 +1,4 @@
-package org.qmp.operaciones;
+package org.qmp.propuestas;
 
 import org.qmp.Guardarropa;
 import org.qmp.prendas.Prenda;
@@ -10,14 +10,12 @@ public class AgregarPrenda extends Propuesta {
   }
 
   @Override
-  public void serAceptada() {
+  public void realizarAceptacion() {
     guardarropa.agregarPrenda(prenda);
-    super.serAceptada();
   }
 
   @Override
-  public void deshacer() {
+  public void realizarDeshacer() {
     guardarropa.quitarPrenda(prenda);
-    super.deshacer();
   }
 }

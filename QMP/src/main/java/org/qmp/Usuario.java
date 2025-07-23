@@ -2,9 +2,9 @@ package org.qmp;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.qmp.operaciones.Propuesta;
 import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Prenda;
+import org.qmp.propuestas.Propuesta;
 import org.qmp.sugeridores.Sugeridor;
 
 public class Usuario {

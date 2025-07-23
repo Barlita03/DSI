@@ -2,14 +2,14 @@ package org.qmp;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.qmp.operaciones.Propuesta;
 import org.qmp.prendas.Prenda;
+import org.qmp.propuestas.EstadoPropuesta;
+import org.qmp.propuestas.Propuesta;
 
 public class Guardarropa {
   private final String criterio;
   private final List<Prenda> prendas = new ArrayList<>();
-  private final List<Propuesta> propuestasPendientes = new ArrayList<>();
-  private final List<Propuesta> propuestasProcesadas = new ArrayList<>();
+  private final List<Propuesta> propuestas = new ArrayList<>();
 
   // --- Constructor ---
 
@@ -45,11 +45,18 @@ public class Guardarropa {
   }
 
   public List<Propuesta> getPropuestasPendientes() {
-    return new ArrayList<>(propuestasPendientes);
+    return new ArrayList<>(
+        propuestas.stream().filter(p -> p.getEstado().equals(EstadoPropuesta.PENDIENTE)).toList());
   }
 
   public List<Propuesta> getPropuestasProcesadas() {
-    return new ArrayList<>(propuestasProcesadas);
+    return new ArrayList<>(
+        propuestas.stream()
+            .filter(
+                p ->
+                    p.getEstado().equals(EstadoPropuesta.ACEPTADA)
+                        || p.getEstado().equals(EstadoPropuesta.RECHAZADA))
+            .toList());
   }
 
   // --- Metodos ---
@@ -71,30 +78,14 @@ public class Guardarropa {
   }
 
   public void agregarPropuesta(Propuesta propuesta) {
-    propuestasPendientes.add(propuesta);
-  }
-
-  public void quitarPropuesta(Propuesta propuesta) {
-    propuestasPendientes.remove(propuesta);
-  }
-
-  public void registrarPropuestaProcesada(Propuesta propuesta) {
-    propuestasProcesadas.add(propuesta);
-  }
-
-  public void quitarPropuestaProcesada(Propuesta propuesta) {
-    propuestasProcesadas.remove(propuesta);
+    propuestas.add(propuesta);
   }
 
   public void limpiarListaPrendas() {
     prendas.clear();
   }
 
-  public void limpiarListaPropuestasPendientes() {
-    propuestasPendientes.clear();
-  }
-
-  public void limpiarListaPropuestasProcesadas() {
-    propuestasProcesadas.clear();
+  public void limpiarListaPropuestas() {
+    propuestas.clear();
   }
 }
