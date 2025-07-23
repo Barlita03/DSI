@@ -98,9 +98,23 @@ public class ParcialTests {
 
     assertEquals(0, canal1.getSuscriptores().size());
 
-    canal1.suscribirseA(canal2);
+    canal1.recibirSuscripcion(canal2);
 
-    assertEquals(1, canal2.getSuscriptores().size());
+    assertEquals(1, canal1.getSuscriptores().size());
+  }
+
+  @Test
+  public void unUsuarioPuedeDesuscribirseDeUnCanal() {
+    Canal canal1 = new Canal();
+    Canal canal2 = new Canal();
+
+    canal1.recibirSuscripcion(canal2);
+
+    assertEquals(1, canal1.getSuscriptores().size());
+
+    canal1.perderSuscripcion(canal2);
+
+    assertEquals(0, canal1.getSuscriptores().size());
   }
 
   @Test
@@ -109,7 +123,7 @@ public class ParcialTests {
 
     assertEquals(0, canal.getMuestrasDeApoyo().size());
 
-    canal.recibirApoyo((byte) 10);
+    canal.recibirApoyo(10);
 
     assertEquals(1, canal.getMuestrasDeApoyo().size());
   }
@@ -126,6 +140,21 @@ public class ParcialTests {
     transmision.agregarVisualizador(canal2);
 
     assertEquals(1, transmision.getEspectadores().size());
+  }
+
+  @Test
+  public void unUsuarioPuedeAbandonarUnaTransmision() {
+    Canal canal1 = new Canal();
+    Canal canal2 = new Canal();
+
+    Transmision transmision = new Transmision(canal1, "transmision");
+    transmision.agregarVisualizador(canal2);
+
+    assertEquals(1, transmision.getEspectadores().size());
+
+    transmision.quitarVisualizador(canal2);
+
+    assertEquals(0, transmision.getEspectadores().size());
   }
 
   @Test

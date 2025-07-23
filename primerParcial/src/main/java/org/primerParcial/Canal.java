@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Canal {
-  private List<Canal> suscriptores = new ArrayList<>();
-  private List<Byte> muestrasDeApoyo = new ArrayList<>();
-  private List<Transmision> historicoTransmisiones = new ArrayList<>();
+  private final List<Canal> suscriptores = new ArrayList<>();
+  private final List<Integer> muestrasDeApoyo = new ArrayList<>();
+  private final List<Transmision> historicoTransmisiones = new ArrayList<>();
 
   // --- Constructor ---
 
@@ -16,27 +16,15 @@ public class Canal {
 
   // --- Metodos ---
 
-  public void suscribirseA(Canal canal) {
-    canal.recibirSuscripcion(this);
-  }
-
   public void recibirSuscripcion(Canal canal) {
     suscriptores.add(canal);
   }
 
-  public void darMuestraDeApoyo(Canal canal, Byte numero) {
-    if (canal.equals(this)) {
-      throw new RuntimeException("No podes enviarte muestras de apoyo a vos mismo");
-    }
-
-    canal.recibirApoyo(numero);
+  public void perderSuscripcion(Canal canal) {
+    suscriptores.remove(canal);
   }
 
-  public void visualizarTransmision(Transmision transmision) {
-    transmision.agregarVisualizador(this);
-  }
-
-  public void recibirApoyo(Byte numero) {
+  public void recibirApoyo(Integer numero) {
     if (numero < 1 || numero > 10) {
       throw new RuntimeException("El apoyo debe estar entre 1 y 10");
     }
@@ -58,7 +46,7 @@ public class Canal {
     return new ArrayList<>(suscriptores);
   }
 
-  public List<Byte> getMuestrasDeApoyo() {
+  public List<Integer> getMuestrasDeApoyo() {
     return new ArrayList<>(muestrasDeApoyo);
   }
 }

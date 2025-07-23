@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Transmision {
-  private String titulo;
-  private Canal autor;
-  private List<String> categorias = new ArrayList<>();
-  private List<Canal> espectadores = new ArrayList<>();
+  private final String titulo;
+  private final Canal autor;
+  private final List<String> categorias = new ArrayList<>();
+  private final List<Canal> espectadores = new ArrayList<>();
   private int maximoParticipantes = 0;
   private LocalDateTime fechaInicio = null;
   private LocalDateTime fechaFin = null;
@@ -61,6 +61,10 @@ public class Transmision {
     if (espectadores.size() > maximoParticipantes) {
       maximoParticipantes = espectadores.size();
     }
+  }
+
+  public void quitarVisualizador(Canal canal) {
+    espectadores.remove(canal);
   }
 
   // --- Getters ---
