@@ -2,14 +2,14 @@ package org.qmp;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.qmp.operaciones.Sugerencia;
+import org.qmp.operaciones.Propuesta;
 import org.qmp.prendas.Prenda;
 
 public class Guardarropa {
   private final String criterio;
   private final List<Prenda> prendas = new ArrayList<>();
-  private final List<Sugerencia> sugerenciasPendientes = new ArrayList<>();
-  private final List<Sugerencia> sugerenciasProcesadas = new ArrayList<>();
+  private final List<Propuesta> propuestasPendientes = new ArrayList<>();
+  private final List<Propuesta> propuestasProcesadas = new ArrayList<>();
 
   // --- Constructor ---
 
@@ -44,18 +44,22 @@ public class Guardarropa {
     return criterio;
   }
 
-  public List<Sugerencia> getSugerenciasPendientes() {
-    return new ArrayList<>(sugerenciasPendientes);
+  public List<Propuesta> getPropuestasPendientes() {
+    return new ArrayList<>(propuestasPendientes);
   }
 
-  public List<Sugerencia> getSugerenciasProcesadas() {
-    return new ArrayList<>(sugerenciasProcesadas);
+  public List<Propuesta> getPropuestasProcesadas() {
+    return new ArrayList<>(propuestasProcesadas);
   }
 
   // --- Metodos ---
 
   public void agregarUsuario(Usuario usuario) {
     usuario.agregarGuardarropa(this);
+  }
+
+  public void quitarUsuario(Usuario usuario) {
+    usuario.eliminarGuardarropa(this);
   }
 
   public void agregarPrenda(Prenda prenda) {
@@ -66,15 +70,31 @@ public class Guardarropa {
     prendas.remove(prenda);
   }
 
-  public void agregarSugerencia(Sugerencia sugerencia) {
-    sugerenciasPendientes.add(sugerencia);
+  public void agregarPropuesta(Propuesta propuesta) {
+    propuestasPendientes.add(propuesta);
   }
 
-  public void quitarSugerencia(Sugerencia sugerencia) {
-    sugerenciasPendientes.remove(sugerencia);
+  public void quitarPropuesta(Propuesta propuesta) {
+    propuestasPendientes.remove(propuesta);
   }
 
-  public void registrarSugerenciaProcesada(Sugerencia sugerencia) {
-    sugerenciasProcesadas.add(sugerencia);
+  public void registrarPropuestaProcesada(Propuesta propuesta) {
+    propuestasProcesadas.add(propuesta);
+  }
+
+  public void quitarPropuestaProcesada(Propuesta propuesta) {
+    propuestasProcesadas.remove(propuesta);
+  }
+
+  public void limpiarListaPrendas() {
+    prendas.clear();
+  }
+
+  public void limpiarListaPropuestasPendientes() {
+    propuestasPendientes.clear();
+  }
+
+  public void limpiarListaPropuestasProcesadas() {
+    propuestasProcesadas.clear();
   }
 }

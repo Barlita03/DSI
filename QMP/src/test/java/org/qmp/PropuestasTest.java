@@ -1,0 +1,125 @@
+package org.qmp;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.qmp.operaciones.AgregarPrenda;
+import org.qmp.operaciones.Propuesta;
+import org.qmp.operaciones.QuitarPrenda;
+import org.qmp.prendas.Formalidad;
+import org.qmp.prendas.Prenda;
+import org.qmp.prendas.TipoDePrenda;
+import org.qmp.prendas.materiales.Color;
+import org.qmp.prendas.materiales.Material;
+import org.qmp.prendas.materiales.Trama;
+import org.qmp.sugeridores.Sugeridor;
+import org.qmp.sugeridores.SugeridorBasico;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class PropuestasTest {
+  Sugeridor sugeridor = new SugeridorBasico();
+  Usuario usuario = new Usuario(21, sugeridor);
+
+  Prenda prenda1 =
+      new Prenda(
+          TipoDePrenda.REMERA,
+          Formalidad.INFORMAL,
+          20,
+          Material.TELA_ALGODON,
+          Trama.LISA,
+          new Color(0, 0, 0));
+  Prenda prenda2 =
+      new Prenda(
+          TipoDePrenda.REMERA,
+          Formalidad.INFORMAL,
+          20,
+          Material.TELA_ALGODON,
+          Trama.LISA,
+          new Color(0, 0, 0));
+
+  Guardarropa guardarropa = new Guardarropa("Criterio", List.of(usuario));
+
+  @BeforeEach
+  void setup() {
+    guardarropa.limpiarListaPrendas();
+    guardarropa.limpiarListaPropuestasPendientes();
+    guardarropa.limpiarListaPropuestasProcesadas();
+
+    guardarropa.agregarPrenda(prenda1);
+  }
+
+  @Test
+  void unUsuarioPuedeCrearPropuestas() {
+    new QuitarPrenda(guardarropa, prenda1);
+
+    assertEquals(1, guardarropa.getPropuestasPendientes().size());
+  }
+
+  @Test
+  void unUsuarioPuedeListarLasPropuestasPendientes() {
+    new QuitarPrenda(guardarropa, prenda1);
+
+    assertEquals(1, usuario.getPropuestasPendientes().size());
+  }
+
+  @Test
+  void unUsuarioPuedeListarLasPropuestasProcesadas() {
+    Propuesta propuesta = new QuitarPrenda(guardarropa, prenda1);
+
+    propuesta.serAceptada();
+
+    assertEquals(0, usuario.getPropuestasPendientes().size());
+    assertEquals(1, usuario.getPropuestasProcesadas().size());
+  }
+
+  @Test
+  void sePuedeAceptarLaPropuestaDeQuitarUnaPrenda() {
+    Propuesta propuesta = new QuitarPrenda(guardarropa, prenda1);
+
+    assertEquals(1, guardarropa.getPrendas().size());
+
+    propuesta.serAceptada();
+
+    assertEquals(0, guardarropa.getPrendas().size());
+  }
+
+  @Test
+  void sePuedeDeshacerLaPropuetaDeQuitarUnaPrenda() {
+    Propuesta propuesta = new QuitarPrenda(guardarropa, prenda1);
+
+    propuesta.serAceptada();
+
+    assertEquals(0, guardarropa.getPrendas().size());
+
+    propuesta.deshacer();
+
+    assertEquals(1, guardarropa.getPrendas().size());
+  }
+
+  @Test
+  void sePuedeAceptarLaPropuestaDeAgregarUnaPrenda() {
+    Propuesta propuesta = new AgregarPrenda(guardarropa, prenda1);
+
+    assertEquals(1, guardarropa.getPrendas().size());
+
+    propuesta.serAceptada();
+
+    assertEquals(2, guardarropa.getPrendas().size());
+  }
+
+  @Test
+  void sePuedeDeshacerLaPropuetaDeAgregarUnaPrenda() {
+    Propuesta propuesta = new AgregarPrenda(guardarropa, prenda1);
+
+    propuesta.serAceptada();
+
+    assertEquals(2, guardarropa.getPrendas().size());
+
+    propuesta.deshacer();
+
+    assertEquals(1, guardarropa.getPrendas().size());
+  }
+}

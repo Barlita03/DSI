@@ -2,7 +2,7 @@ package org.qmp;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.qmp.operaciones.Sugerencia;
+import org.qmp.operaciones.Propuesta;
 import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Prenda;
 import org.qmp.sugeridores.Sugeridor;
@@ -45,12 +45,16 @@ public class Usuario {
     return this.edad;
   }
 
-  public List<Sugerencia> getSugerenciasPendientes() {
-    return guardarropas.stream().flatMap(g -> g.getSugerenciasPendientes().stream()).toList();
+  public List<Propuesta> getPropuestasPendientes() {
+    return guardarropas.stream().flatMap(g -> g.getPropuestasPendientes().stream()).toList();
   }
 
-  public List<Sugerencia> getSugerenciasProcesadas() {
-    return guardarropas.stream().flatMap(g -> g.getSugerenciasProcesadas().stream()).toList();
+  public List<Propuesta> getPropuestasProcesadas() {
+    return guardarropas.stream().flatMap(g -> g.getPropuestasProcesadas().stream()).toList();
+  }
+
+  public List<Guardarropa> getGuardarropas() {
+    return new ArrayList<>(guardarropas);
   }
 
   // --- Setters ---

@@ -22,169 +22,89 @@ import org.qmp.sugeridores.SugeridorPorFormalidad;
 public class UsuariosTests {
   SugeridorBasico sugeridorBasico = new SugeridorBasico();
   SugeridorPorFormalidad sugeridorPorFormalidad = new SugeridorPorFormalidad();
-
-  @Test
-  void unUsuarioSeCreaSatisfactoriamenteSinPrendas() {
-    Usuario usuario = new Usuario(21, sugeridorBasico);
-
-    assertEquals(0, usuario.getPrendas().size());
-  }
-
-  @Test
-  void unUsuarioSeCreaSatisfactoriamenteConPrendas() {
-
-    Prenda remera =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda pantalon =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 100));
-
-    Usuario usuario = new Usuario(21, sugeridorBasico);
-    List<Usuario> usuarios = new ArrayList<>();
-    usuarios.add(usuario);
-    Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
-    guardarropa.agregarPrenda(remera);
-    guardarropa.agregarPrenda(pantalon);
-
-    assertEquals(2, usuario.getPrendas().size());
-  }
+  Prenda remera1 =
+      new Prenda(
+          TipoDePrenda.REMERA,
+          Formalidad.INFORMAL,
+          20,
+          Material.TELA_ALGODON,
+          Trama.LISA,
+          new Color(0, 0, 0));
+  Prenda pantalon1 =
+      new Prenda(
+          TipoDePrenda.PANTALON,
+          Formalidad.INFORMAL,
+          20,
+          Material.TELA_JEAN,
+          Trama.LISA,
+          new Color(0, 0, 100));
+  Prenda calzado1 =
+      new Prenda(
+          TipoDePrenda.ZAPATILLA,
+          Formalidad.INFORMAL,
+          20,
+          Material.CUERO,
+          Trama.LISA,
+          new Color(0, 0, 100));
+  Prenda remera2 =
+      new Prenda(
+          TipoDePrenda.REMERA,
+          Formalidad.FORMAL,
+          20,
+          Material.TELA_ALGODON,
+          Trama.LISA,
+          new Color(255, 255, 255));
+  Prenda pantalon2 =
+      new Prenda(
+          TipoDePrenda.PANTALON,
+          Formalidad.FORMAL,
+          20,
+          Material.TELA_JEAN,
+          Trama.LISA,
+          new Color(0, 0, 0));
+  Prenda calzado2 =
+      new Prenda(
+          TipoDePrenda.ZAPATILLA,
+          Formalidad.FORMAL,
+          20,
+          Material.CUERO,
+          Trama.LISA,
+          new Color(255, 255, 255));
 
   @Test
   void unUsuarioPuedeAdquirirPrendas() {
-    Prenda remera =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda pantalon =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 100));
-    Prenda zapatilla =
-        new Prenda(
-            TipoDePrenda.ZAPATILLA,
-            Formalidad.INFORMAL,
-            20,
-            Material.CUERO,
-            Trama.LISA,
-            new Color(0, 0, 0));
-
     Usuario usuario = new Usuario(21, sugeridorBasico);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
     Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
-    guardarropa.agregarPrenda(remera);
-    guardarropa.agregarPrenda(pantalon);
+    guardarropa.agregarPrenda(remera1);
+    guardarropa.agregarPrenda(pantalon1);
 
     assertEquals(2, usuario.getPrendas().size());
 
-    guardarropa.agregarPrenda(zapatilla);
+    guardarropa.agregarPrenda(calzado1);
 
     assertEquals(3, usuario.getPrendas().size());
   }
 
   @Test
   void unUsuarioPuedeDesecharPrendas() {
-    Prenda remera =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda pantalon =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 100));
-
     Usuario usuario = new Usuario(21, sugeridorBasico);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
     Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
-    guardarropa.agregarPrenda(remera);
-    guardarropa.agregarPrenda(pantalon);
+    guardarropa.agregarPrenda(remera1);
+    guardarropa.agregarPrenda(pantalon1);
 
     assertEquals(2, usuario.getPrendas().size());
 
-    guardarropa.quitarPrenda(remera);
+    guardarropa.quitarPrenda(remera1);
 
     assertEquals(1, usuario.getPrendas().size());
   }
 
   @Test
   void unUsuarioPuedeGenerarSugerencias() {
-    Prenda remera1 =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda pantalon1 =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 100));
-    Prenda calzado1 =
-        new Prenda(
-            TipoDePrenda.ZAPATILLA,
-            Formalidad.INFORMAL,
-            20,
-            Material.CUERO,
-            Trama.LISA,
-            new Color(0, 0, 100));
-    Prenda remera2 =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.FORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(255, 255, 255));
-    Prenda pantalon2 =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.FORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda calzado2 =
-        new Prenda(
-            TipoDePrenda.ZAPATILLA,
-            Formalidad.FORMAL,
-            20,
-            Material.CUERO,
-            Trama.LISA,
-            new Color(255, 255, 255));
-
     Usuario usuario = new Usuario(21, sugeridorBasico);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
@@ -201,55 +121,6 @@ public class UsuariosTests {
 
   @Test
   void siUnUsuarioEsMenorA55YUsaElSugeridorPorFormalidadSeLeGeneranTodaClaseDeAtuendos() {
-    Prenda remera1 =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda pantalon1 =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 100));
-    Prenda calzado1 =
-        new Prenda(
-            TipoDePrenda.ZAPATILLA,
-            Formalidad.INFORMAL,
-            20,
-            Material.CUERO,
-            Trama.LISA,
-            new Color(0, 0, 100));
-    Prenda remera2 =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.FORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(255, 255, 255));
-    Prenda pantalon2 =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.FORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda calzado2 =
-        new Prenda(
-            TipoDePrenda.ZAPATILLA,
-            Formalidad.FORMAL,
-            20,
-            Material.CUERO,
-            Trama.LISA,
-            new Color(255, 255, 255));
-
     Usuario usuario = new Usuario(21, sugeridorPorFormalidad);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
@@ -266,55 +137,6 @@ public class UsuariosTests {
 
   @Test
   void siUnUsuarioEsMayorA55YUsaElSugeridorPorFormalidadSoloSeLeGeneranSugerenciasFormales() {
-    Prenda remera1 =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda pantalon1 =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.INFORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 100));
-    Prenda calzado1 =
-        new Prenda(
-            TipoDePrenda.ZAPATILLA,
-            Formalidad.INFORMAL,
-            20,
-            Material.CUERO,
-            Trama.LISA,
-            new Color(0, 0, 100));
-    Prenda remera2 =
-        new Prenda(
-            TipoDePrenda.REMERA,
-            Formalidad.FORMAL,
-            20,
-            Material.TELA_ALGODON,
-            Trama.LISA,
-            new Color(255, 255, 255));
-    Prenda pantalon2 =
-        new Prenda(
-            TipoDePrenda.PANTALON,
-            Formalidad.FORMAL,
-            20,
-            Material.TELA_JEAN,
-            Trama.LISA,
-            new Color(0, 0, 0));
-    Prenda calzado2 =
-        new Prenda(
-            TipoDePrenda.ZAPATILLA,
-            Formalidad.FORMAL,
-            20,
-            Material.CUERO,
-            Trama.LISA,
-            new Color(255, 255, 255));
-
     Usuario usuario = new Usuario(60, sugeridorPorFormalidad);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
@@ -334,11 +156,11 @@ public class UsuariosTests {
   }
 
   @Test
-  void condicionClimatica() {
-    ServicioMeteorologicoAccuWeather servicioMeteorologicoAccuWeather =
-        new ServicioMeteorologicoAccuWeather(new AccuWeatherApi(), Duration.ofDays(1));
+  void unUsuarioPuedeTenerVariosGuardarropas() {
+    Usuario usuario = new Usuario(21, sugeridorBasico);
+    new Guardarropa("Criterio", List.of(usuario));
+    new Guardarropa("Criterio", List.of(usuario));
 
-    assertEquals(
-        13, servicioMeteorologicoAccuWeather.getTemperaturaEnCelsius("Buenos Aires, Argentina"));
+    assertEquals(2, usuario.getGuardarropas().size());
   }
 }
