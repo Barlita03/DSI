@@ -6,11 +6,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.qmp.sugeridores.Sugeridor;
 import org.qmp.sugeridores.SugeridorBasico;
+import org.qmp.usuarios.Usuario;
 
 public class GuardarropasTest {
   Sugeridor sugeridor = new SugeridorBasico();
-  Usuario usuario1 = new Usuario(21, sugeridor);
-  Usuario usuario2 = new Usuario(21, sugeridor);
+  Usuario usuario1 = new Usuario(21, "email", sugeridor);
+  Usuario usuario2 = new Usuario(21, "email", sugeridor);
 
   @Test
   public void unGuardarropasPuedeSerCompartidoEntreVariosUsuarios() {

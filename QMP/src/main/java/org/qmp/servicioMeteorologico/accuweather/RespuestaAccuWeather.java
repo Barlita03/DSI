@@ -1,4 +1,4 @@
-package org.qmp.apis.accuweather;
+package org.qmp.servicioMeteorologico.accuweather;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

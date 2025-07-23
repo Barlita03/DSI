@@ -16,10 +16,11 @@ import org.qmp.propuestas.Propuesta;
 import org.qmp.propuestas.QuitarPrenda;
 import org.qmp.sugeridores.Sugeridor;
 import org.qmp.sugeridores.SugeridorBasico;
+import org.qmp.usuarios.Usuario;
 
 public class PropuestasTest {
   Sugeridor sugeridor = new SugeridorBasico();
-  Usuario usuario = new Usuario(21, sugeridor);
+  Usuario usuario = new Usuario(21, "email", sugeridor);
 
   Prenda prenda1 =
       new Prenda(

@@ -1,15 +1,16 @@
-package org.qmp.apis.accuweather;
+package org.qmp.servicioMeteorologico.accuweather;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import org.qmp.apis.AccuWeatherApi;
+import org.qmp.servicioMeteorologico.ServicioMetereologico;
 
 public class ServicioMeteorologicoAccuWeather implements ServicioMetereologico {
-  private Map<String, RespuestaAccuWeather> ultimasRespuestas;
-  private AccuWeatherApi api;
-  private Duration periodoDeValidez;
+  private final Map<String, RespuestaAccuWeather> ultimasRespuestas;
+  private final AccuWeatherApi api;
+  private final Duration periodoDeValidez;
 
   // --- Constructor ---
 

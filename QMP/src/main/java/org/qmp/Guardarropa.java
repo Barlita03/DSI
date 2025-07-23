@@ -5,6 +5,7 @@ import java.util.List;
 import org.qmp.prendas.Prenda;
 import org.qmp.propuestas.EstadoPropuesta;
 import org.qmp.propuestas.Propuesta;
+import org.qmp.usuarios.Usuario;
 
 public class Guardarropa {
   private final String criterio;

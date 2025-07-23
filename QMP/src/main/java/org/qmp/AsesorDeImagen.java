@@ -1,8 +1,9 @@
 package org.qmp;
 
 import java.util.List;
-import org.qmp.apis.accuweather.ServicioMeteorologicoAccuWeather;
 import org.qmp.prendas.Atuendo;
+import org.qmp.servicioMeteorologico.accuweather.ServicioMeteorologicoAccuWeather;
+import org.qmp.usuarios.Usuario;
 
 public class AsesorDeImagen {
   private final ServicioMeteorologicoAccuWeather servicioMeteorologicoAccuWeather;

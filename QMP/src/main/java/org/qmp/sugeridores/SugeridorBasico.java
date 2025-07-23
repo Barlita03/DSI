@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.qmp.Usuario;
 import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Prenda;
+import org.qmp.usuarios.Usuario;
 
 public class SugeridorBasico implements Sugeridor {
 

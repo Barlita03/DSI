@@ -7,7 +7,7 @@ import java.util.Map;
 
 public final class AccuWeatherApi {
 
-  public final List<Map<String, Object>> getWeather(String ciudad) {
+  public List<Map<String, Object>> getWeather(String ciudad) {
     return Arrays.asList(
         new HashMap<String, Object>() {
           {
@@ -30,5 +30,10 @@ public final class AccuWeatherApi {
                 });
           }
         });
+  }
+
+  public Map<String, List<String>> getAlerts(String city) {
+    // TODO
+    return null;
   }
 }
