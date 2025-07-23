@@ -6,6 +6,11 @@ import org.qmp.usuarios.Usuario;
 
 public abstract class Notificador {
   private final List<Usuario> usuarios = new ArrayList<>();
+  protected String mensaje;
+
+  public Notificador(String mensaje) {
+    this.mensaje = mensaje;
+  }
 
   public void suscribirse(Usuario usuario) {
     usuarios.add(usuario);

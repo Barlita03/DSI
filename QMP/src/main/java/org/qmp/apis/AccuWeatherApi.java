@@ -1,6 +1,5 @@
 package org.qmp.apis;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +7,8 @@ import java.util.Map;
 public final class AccuWeatherApi {
 
   public List<Map<String, Object>> getWeather(String ciudad) {
-    return Arrays.asList(
-        new HashMap<String, Object>() {
+    return List.of(
+        new HashMap<>() {
           {
             put("DateTime", "2019-05-03T01:00:00-03:00");
             put("EpochDateTime", 1556856000);
@@ -33,7 +32,11 @@ public final class AccuWeatherApi {
   }
 
   public Map<String, List<String>> getAlerts(String city) {
-    // TODO
-    return null;
+    return new HashMap<>() {
+      {
+        put("CurrentAlerts", List.of("Granizo", "Nevada"));
+        put("PastAlerts", List.of("Frio intenso"));
+      }
+    };
   }
 }

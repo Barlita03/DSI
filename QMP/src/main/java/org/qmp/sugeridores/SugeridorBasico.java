@@ -12,12 +12,12 @@ import org.qmp.usuarios.Usuario;
 public class SugeridorBasico implements Sugeridor {
 
   public List<Atuendo> generarSugerencias(Usuario usuario) {
-    List<Prenda> prendasSuperiores = new ArrayList<Prenda>(usuario.getPrendasSuperiores());
-    List<Prenda> prendasInferiores = new ArrayList<Prenda>(usuario.getPrendasInferiores());
-    List<Prenda> calzados = new ArrayList<Prenda>(usuario.getCalzados());
-    List<Prenda> accesorios = new ArrayList<Prenda>(usuario.getAccesorios());
+    List<Prenda> prendasSuperiores = new ArrayList<>(usuario.getPrendasSuperiores());
+    List<Prenda> prendasInferiores = new ArrayList<>(usuario.getPrendasInferiores());
+    List<Prenda> calzados = new ArrayList<>(usuario.getCalzados());
+    List<Prenda> accesorios = new ArrayList<>(usuario.getAccesorios());
 
-    List<Atuendo> sugerencias = new ArrayList<Atuendo>();
+    List<Atuendo> sugerencias = new ArrayList<>();
 
     for (Prenda parteSuperior : prendasSuperiores) {
       for (Prenda parteInferior : prendasInferiores) {
@@ -25,10 +25,7 @@ public class SugeridorBasico implements Sugeridor {
           for (Set<Prenda> combinacionAccesorios : Sets.powerSet(new HashSet<>(accesorios))) {
             sugerencias.add(
                 new Atuendo(
-                    parteSuperior,
-                    parteInferior,
-                    calzado,
-                    new ArrayList<Prenda>(combinacionAccesorios)));
+                    parteSuperior, parteInferior, calzado, new ArrayList<>(combinacionAccesorios)));
           }
         }
       }

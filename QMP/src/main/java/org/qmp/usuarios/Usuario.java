@@ -2,6 +2,7 @@ package org.qmp.usuarios;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.qmp.AsesorDeImagen;
 import org.qmp.Guardarropa;
 import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Prenda;
@@ -10,6 +11,7 @@ import org.qmp.sugeridores.Sugeridor;
 
 public class Usuario {
   private Sugeridor sugeridor;
+  private AsesorDeImagen asesor;
   private final List<Guardarropa> guardarropas = new ArrayList<>();
   private final String email;
   private final int edad;
@@ -17,10 +19,11 @@ public class Usuario {
 
   // --- Constructor ---
 
-  public Usuario(int edad, String email, Sugeridor sugeridor) {
+  public Usuario(int edad, String email, Sugeridor sugeridor, AsesorDeImagen asesor) {
     this.edad = edad;
     this.email = email;
     this.sugeridor = sugeridor;
+    this.asesor = asesor;
 
     GestorDeUsuarios.agregarUsuario(this);
   }
@@ -67,6 +70,10 @@ public class Usuario {
     return new ArrayList<>(sugerenciasDiarias);
   }
 
+  public String getEmail() {
+    return email;
+  }
+
   // --- Setters ---
 
   public void setSugeridor(Sugeridor sugeridor) {
@@ -75,13 +82,20 @@ public class Usuario {
 
   // --- Metodos ---
 
-  public List<Atuendo> sugerenciasDiarias() {
-    sugerenciasDiarias.clear();
-    sugerenciasDiarias.addAll(sugeridor.generarSugerencias(this));
-    return new ArrayList<>(sugerenciasDiarias);
+  public void recibirNotificacion() {
+    sugerenciasDiarias();
   }
 
-  public List<Atuendo> generarSugerencias() {
+  public void sugerenciasDiarias() {
+    sugerenciasDiarias.clear();
+    sugerenciasDiarias.addAll(sugeridor.generarSugerencias(this));
+  }
+
+  public List<Atuendo> generarSugerencias(String ubicacion) {
+    return asesor.sugerirAtuendos(ubicacion, this);
+  }
+
+  public List<Atuendo> todasLasCombinaciones() {
     return new ArrayList<>(sugeridor.generarSugerencias(this));
   }
 

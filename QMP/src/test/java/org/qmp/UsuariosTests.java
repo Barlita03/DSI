@@ -3,10 +3,12 @@ package org.qmp;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.qmp.apis.AccuWeatherApi;
 import org.qmp.prendas.Atuendo;
 import org.qmp.prendas.Formalidad;
 import org.qmp.prendas.Prenda;
@@ -14,12 +16,17 @@ import org.qmp.prendas.TipoDePrenda;
 import org.qmp.prendas.materiales.Color;
 import org.qmp.prendas.materiales.Material;
 import org.qmp.prendas.materiales.Trama;
+import org.qmp.serviciosmeteorologicos.ServicioMeteorologico;
+import org.qmp.serviciosmeteorologicos.accuweather.ServicioMeteorologicoAccuWeather;
 import org.qmp.sugeridores.SugeridorBasico;
 import org.qmp.sugeridores.SugeridorPorFormalidad;
 import org.qmp.usuarios.GestorDeUsuarios;
 import org.qmp.usuarios.Usuario;
 
 public class UsuariosTests {
+  ServicioMeteorologico servicioMeteorologico =
+      new ServicioMeteorologicoAccuWeather(new AccuWeatherApi(), Duration.ofHours(3));
+  AsesorDeImagen asesor = new AsesorDeImagen(servicioMeteorologico);
   SugeridorBasico sugeridorBasico = new SugeridorBasico();
   SugeridorPorFormalidad sugeridorPorFormalidad = new SugeridorPorFormalidad();
   Prenda remera1 =
@@ -78,7 +85,7 @@ public class UsuariosTests {
 
   @Test
   void unUsuarioPuedeAdquirirPrendas() {
-    Usuario usuario = new Usuario(21, "email", sugeridorBasico);
+    Usuario usuario = new Usuario(21, "email", sugeridorBasico, asesor);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
     Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
@@ -94,7 +101,7 @@ public class UsuariosTests {
 
   @Test
   void unUsuarioPuedeDesecharPrendas() {
-    Usuario usuario = new Usuario(21, "email", sugeridorBasico);
+    Usuario usuario = new Usuario(21, "email", sugeridorBasico, asesor);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
     Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
@@ -110,7 +117,7 @@ public class UsuariosTests {
 
   @Test
   void unUsuarioPuedeGenerarSugerencias() {
-    Usuario usuario = new Usuario(21, "email", sugeridorBasico);
+    Usuario usuario = new Usuario(21, "email", sugeridorBasico, asesor);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
     Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
@@ -121,12 +128,12 @@ public class UsuariosTests {
     guardarropa.agregarPrenda(pantalon2);
     guardarropa.agregarPrenda(calzado2);
 
-    assertEquals(8, usuario.generarSugerencias().size());
+    assertEquals(8, usuario.generarSugerencias("Buenos Aires").size());
   }
 
   @Test
   void siUnUsuarioEsMenorA55YUsaElSugeridorPorFormalidadSeLeGeneranTodaClaseDeAtuendos() {
-    Usuario usuario = new Usuario(21, "email", sugeridorPorFormalidad);
+    Usuario usuario = new Usuario(21, "email", sugeridorPorFormalidad, asesor);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
     Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
@@ -137,12 +144,12 @@ public class UsuariosTests {
     guardarropa.agregarPrenda(pantalon2);
     guardarropa.agregarPrenda(calzado2);
 
-    assertEquals(8, usuario.generarSugerencias().size());
+    assertEquals(8, usuario.generarSugerencias("Buenos Aires").size());
   }
 
   @Test
   void siUnUsuarioEsMayorA55YUsaElSugeridorPorFormalidadSoloSeLeGeneranSugerenciasFormales() {
-    Usuario usuario = new Usuario(60, "email", sugeridorPorFormalidad);
+    Usuario usuario = new Usuario(60, "email", sugeridorPorFormalidad, asesor);
     List<Usuario> usuarios = new ArrayList<>();
     usuarios.add(usuario);
     Guardarropa guardarropa = new Guardarropa("criterio", usuarios);
@@ -153,7 +160,7 @@ public class UsuariosTests {
     guardarropa.agregarPrenda(pantalon2);
     guardarropa.agregarPrenda(calzado2);
 
-    List<Atuendo> sugerencias = usuario.generarSugerencias();
+    List<Atuendo> sugerencias = usuario.generarSugerencias("Buenos Aires");
 
     assertEquals(1, sugerencias.size());
 
@@ -162,7 +169,7 @@ public class UsuariosTests {
 
   @Test
   void unUsuarioPuedeTenerVariosGuardarropas() {
-    Usuario usuario = new Usuario(21, "email", sugeridorBasico);
+    Usuario usuario = new Usuario(21, "email", sugeridorBasico, asesor);
     new Guardarropa("Criterio", List.of(usuario));
     new Guardarropa("Criterio", List.of(usuario));
 
@@ -171,8 +178,8 @@ public class UsuariosTests {
 
   @Test
   void unEmpleadoPuedeDispararLasSugerenciasParaTodosLosUsuarios() {
-    Usuario usuario1 = new Usuario(21, "email", sugeridorBasico);
-    Usuario usuario2 = new Usuario(21, "email", sugeridorBasico);
+    Usuario usuario1 = new Usuario(21, "email", sugeridorBasico, asesor);
+    Usuario usuario2 = new Usuario(21, "email", sugeridorBasico, asesor);
 
     Guardarropa guardarropa = new Guardarropa("Criterio", List.of(usuario1, usuario2));
     guardarropa.agregarPrenda(remera1);

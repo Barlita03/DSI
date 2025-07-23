@@ -18,19 +18,12 @@ public class Atuendo {
     this.accesorios = new ArrayList<>();
   }
 
-  public Atuendo(Prenda parteSuperior, Prenda parteInferior, Prenda calzado, Prenda... accesorios) {
-    this.parteSuperior = parteSuperior;
-    this.parteInferior = parteInferior;
-    this.calzado = calzado;
-    this.accesorios = new ArrayList<>(List.of(accesorios));
-  }
-
   public Atuendo(
       Prenda parteSuperior, Prenda parteInferior, Prenda calzado, List<Prenda> accesorios) {
     this.parteSuperior = parteSuperior;
     this.parteInferior = parteInferior;
     this.calzado = calzado;
-    this.accesorios = new ArrayList<Prenda>(accesorios);
+    this.accesorios = new ArrayList<>(accesorios);
   }
 
   // --- Getters ---
@@ -48,7 +41,7 @@ public class Atuendo {
   }
 
   public List<Prenda> getAccesorios() {
-    return new ArrayList<Prenda>(this.accesorios);
+    return new ArrayList<>(this.accesorios);
   }
 
   // --- Metodos ---

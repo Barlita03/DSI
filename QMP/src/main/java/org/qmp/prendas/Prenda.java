@@ -6,11 +6,11 @@ import org.qmp.prendas.materiales.Trama;
 
 public class Prenda {
   private final TipoDePrenda tipoDePrenda;
-  private Formalidad formalidad;
-  private int temperaturaMaxima;
-  private Material material;
+  private final Formalidad formalidad;
+  private final int temperaturaMaxima;
+  private final Material material;
   private Trama trama = Trama.LISA;
-  private Color colorPrincipal;
+  private final Color colorPrincipal;
   private Color colorSecundario;
 
   // --- Constructor ---
@@ -24,6 +24,7 @@ public class Prenda {
       Color colorSecundario) {
     this.tipoDePrenda = tipoDePrenda;
     this.formalidad = formalidad;
+    this.temperaturaMaxima = temperaturaMaxima;
     this.material = material;
     this.trama = trama;
     this.colorPrincipal = colorPrincipal;
@@ -39,6 +40,7 @@ public class Prenda {
       Color colorPrincipal) {
     this.tipoDePrenda = tipoDePrenda;
     this.formalidad = formalidad;
+    this.temperaturaMaxima = temperaturaMaxima;
     this.material = material;
     this.trama = trama;
     this.colorPrincipal = colorPrincipal;

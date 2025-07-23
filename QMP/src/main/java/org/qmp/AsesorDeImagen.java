@@ -2,21 +2,21 @@ package org.qmp;
 
 import java.util.List;
 import org.qmp.prendas.Atuendo;
-import org.qmp.servicioMeteorologico.accuweather.ServicioMeteorologicoAccuWeather;
+import org.qmp.serviciosmeteorologicos.ServicioMeteorologico;
 import org.qmp.usuarios.Usuario;
 
 public class AsesorDeImagen {
-  private final ServicioMeteorologicoAccuWeather servicioMeteorologicoAccuWeather;
+  private final ServicioMeteorologico servicioMeteorologico;
 
-  public AsesorDeImagen(ServicioMeteorologicoAccuWeather servicioMeteorologicoAccuWeather) {
-    this.servicioMeteorologicoAccuWeather = servicioMeteorologicoAccuWeather;
+  public AsesorDeImagen(ServicioMeteorologico servicioMeteorologico) {
+    this.servicioMeteorologico = servicioMeteorologico;
   }
 
-  public Atuendo sugerirAtuendo(String direccion, Usuario usuario) {
-    int temperatura = this.servicioMeteorologicoAccuWeather.getTemperaturaEnCelsius(direccion);
+  public List<Atuendo> sugerirAtuendos(String direccion, Usuario usuario) {
+    int temperatura = this.servicioMeteorologico.getTemperaturaEnCelsius(direccion);
 
-    List<Atuendo> combinaciones = usuario.generarSugerencias();
+    List<Atuendo> combinaciones = usuario.todasLasCombinaciones();
 
-    return combinaciones.stream().filter(a -> a.aptoParaTemperatura(temperatura)).toList().get(0);
+    return combinaciones.stream().filter(a -> a.aptoParaTemperatura(temperatura)).toList();
   }
 }
