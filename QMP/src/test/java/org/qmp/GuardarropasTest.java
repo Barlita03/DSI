@@ -14,7 +14,8 @@ import org.qmp.usuarios.Usuario;
 
 public class GuardarropasTest {
   ServicioMeteorologico servicioMeteorologico =
-      new ServicioMeteorologicoAccuWeather(new AccuWeatherApi(), Duration.ofHours(3));
+      new ServicioMeteorologicoAccuWeather(
+          new AccuWeatherApi(), Duration.ofHours(3), "Buenos Aires");
   AsesorDeImagen asesor = new AsesorDeImagen(servicioMeteorologico);
   Sugeridor sugeridor = new SugeridorBasico();
   Usuario usuario1 = new Usuario(21, "email", sugeridor, asesor);

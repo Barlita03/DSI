@@ -12,8 +12,8 @@ public class AsesorDeImagen {
     this.servicioMeteorologico = servicioMeteorologico;
   }
 
-  public List<Atuendo> sugerirAtuendos(String direccion, Usuario usuario) {
-    int temperatura = this.servicioMeteorologico.getTemperaturaEnCelsius(direccion);
+  public List<Atuendo> sugerirAtuendos(Usuario usuario) {
+    int temperatura = this.servicioMeteorologico.getTemperaturaEnCelsius();
 
     List<Atuendo> combinaciones = usuario.todasLasCombinaciones();
 

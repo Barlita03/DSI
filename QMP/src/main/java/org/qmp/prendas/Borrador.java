@@ -1,6 +1,8 @@
 package org.qmp.prendas;
 
 import org.qmp.exceptions.InvalidPrenda;
+import org.qmp.prendas.atributos.Formalidad;
+import org.qmp.prendas.atributos.TipoDePrenda;
 import org.qmp.prendas.materiales.Color;
 import org.qmp.prendas.materiales.Material;
 import org.qmp.prendas.materiales.Trama;

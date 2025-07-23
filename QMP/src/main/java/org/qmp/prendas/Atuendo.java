@@ -2,6 +2,7 @@ package org.qmp.prendas;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.qmp.prendas.atributos.Formalidad;
 
 public class Atuendo {
   private final Prenda parteSuperior;
@@ -24,24 +25,6 @@ public class Atuendo {
     this.parteInferior = parteInferior;
     this.calzado = calzado;
     this.accesorios = new ArrayList<>(accesorios);
-  }
-
-  // --- Getters ---
-
-  public Prenda getParteSuperior() {
-    return parteSuperior;
-  }
-
-  public Prenda getParteInferior() {
-    return parteInferior;
-  }
-
-  public Prenda getCalzado() {
-    return calzado;
-  }
-
-  public List<Prenda> getAccesorios() {
-    return new ArrayList<>(this.accesorios);
   }
 
   // --- Metodos ---

@@ -9,57 +9,59 @@ import org.qmp.apis.AccuWeatherApi;
 import org.qmp.serviciosmeteorologicos.ServicioMeteorologico;
 
 public class ServicioMeteorologicoAccuWeather implements ServicioMeteorologico {
-  private final Map<String, RespuestaAccuWeather> ultimasRespuestas;
+  private final Map<String, RespuestaAccuWeather> ultimasRespuestas = new HashMap<>();
   private final AccuWeatherApi api;
   private final Duration periodoDeValidez;
+  private final String ubicacion;
 
   // --- Constructor ---
 
-  public ServicioMeteorologicoAccuWeather(AccuWeatherApi api, Duration periodoDeValidez) {
+  public ServicioMeteorologicoAccuWeather(
+      AccuWeatherApi api, Duration periodoDeValidez, String ubicacion) {
     this.api = api;
+    this.ubicacion = ubicacion;
     this.periodoDeValidez = periodoDeValidez;
-    this.ultimasRespuestas = new HashMap<>();
   }
 
   // --- Getters ---
 
-  public Map<String, Object> getCondicionesClimaticas(String direccion) {
-    validar(direccion);
-    return ultimasRespuestas.get(direccion).getEstadoDelTiempo();
+  public Map<String, Object> getCondicionesClimaticas() {
+    validar();
+    return ultimasRespuestas.get(ubicacion).getEstadoDelTiempo();
   }
 
-  public List<String> getAlertasMeteorologicas(String direccion) {
-    validar(direccion);
-    return ultimasRespuestas.get(direccion).getAlertasMeteorologicas().get("CurrentAlerts");
+  public List<String> getAlertasMeteorologicas() {
+    validar();
+    return ultimasRespuestas.get(ubicacion).getAlertasMeteorologicas().get("CurrentAlerts");
   }
 
-  public int getTemperaturaEnFarenheit(String direccion) {
+  public int getTemperaturaEnFarenheit() {
     Map<String, Object> temperatura =
-        (Map<String, Object>) getCondicionesClimaticas(direccion).get("Temperature");
+        (Map<String, Object>) getCondicionesClimaticas().get("Temperature");
     return (int) temperatura.get("Value");
   }
 
-  public int getTemperaturaEnCelsius(String direccion) {
-    return (getTemperaturaEnFarenheit(direccion) - 32) * 5 / 9;
+  public int getTemperaturaEnCelsius() {
+    return (getTemperaturaEnFarenheit() - 32) * 5 / 9;
   }
 
   // --- Metodos ---
 
-  private void validar(String direccion) {
-    if (!ultimasRespuestas.containsKey(direccion) || ultimasRespuestas.get(direccion).expiro()) {
-      actualizar(direccion);
+  private void validar() {
+    if (!ultimasRespuestas.containsKey(ubicacion) || ultimasRespuestas.get(ubicacion).expiro()) {
+      actualizar();
     }
   }
 
-  private void actualizar(String direccion) {
-    if (ultimasRespuestas.get(direccion) != null) {
-      ultimasRespuestas.remove(direccion);
+  private void actualizar() {
+    if (ultimasRespuestas.get(ubicacion) != null) {
+      ultimasRespuestas.remove(ubicacion);
     }
 
     ultimasRespuestas.put(
-        direccion,
+        ubicacion,
         new RespuestaAccuWeather(
-            api.getWeather(direccion).get(0), api.getAlerts(direccion), proximaExpiracion()));
+            api.getWeather(ubicacion).get(0), api.getAlerts(ubicacion), proximaExpiracion()));
   }
 
   private LocalDateTime proximaExpiracion() {

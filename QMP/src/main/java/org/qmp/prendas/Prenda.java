@@ -1,5 +1,8 @@
 package org.qmp.prendas;
 
+import org.qmp.prendas.atributos.Categoria;
+import org.qmp.prendas.atributos.Formalidad;
+import org.qmp.prendas.atributos.TipoDePrenda;
 import org.qmp.prendas.materiales.Color;
 import org.qmp.prendas.materiales.Material;
 import org.qmp.prendas.materiales.Trama;

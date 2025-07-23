@@ -1,9 +1,9 @@
 package org.qmp.sastres;
 
 import org.qmp.prendas.Borrador;
-import org.qmp.prendas.Formalidad;
 import org.qmp.prendas.Prenda;
-import org.qmp.prendas.TipoDePrenda;
+import org.qmp.prendas.atributos.Formalidad;
+import org.qmp.prendas.atributos.TipoDePrenda;
 import org.qmp.prendas.materiales.Color;
 import org.qmp.prendas.materiales.Material;
 

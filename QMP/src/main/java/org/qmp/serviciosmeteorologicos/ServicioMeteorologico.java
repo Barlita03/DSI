@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface ServicioMeteorologico {
-  Map<String, Object> getCondicionesClimaticas(String direccion);
+  Map<String, Object> getCondicionesClimaticas();
 
-  int getTemperaturaEnFarenheit(String direccion);
+  int getTemperaturaEnFarenheit();
 
-  int getTemperaturaEnCelsius(String direccion);
+  int getTemperaturaEnCelsius();
 
-  List<String> getAlertasMeteorologicas(String ciudad);
+  List<String> getAlertasMeteorologicas();
 }

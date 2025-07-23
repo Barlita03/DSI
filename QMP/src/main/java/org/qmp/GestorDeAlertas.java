@@ -1,52 +1,31 @@
 package org.qmp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.qmp.serviciosmeteorologicos.ServicioMeteorologico;
+import org.qmp.usuarios.GestorDeUsuarios;
 
 public class GestorDeAlertas {
-  private static final GestorDeAlertas instancia = new GestorDeAlertas();
-  private final Map<ServicioMeteorologico, List<String>> alertasPendientes = new HashMap<>();
-  private final List<String> alertasLanzadas = new ArrayList<>();
+  private final ServicioMeteorologico servicioMeteorologico;
+  private List<String> alertas;
 
-  public static GestorDeAlertas getInstancia() {
-    return instancia;
+  public GestorDeAlertas(ServicioMeteorologico servicioMeteorologico) {
+    this.servicioMeteorologico = servicioMeteorologico;
   }
 
-  public List<String> getAlertasPendientes() {
-    List<String> alertasFiltradas = new ArrayList<>();
+  public void actualizarAlertas() {
+    alertas = servicioMeteorologico.getAlertasMeteorologicas();
+  }
 
-    for (List<String> alertasPorServicio : alertasPendientes.values()) {
-      alertasFiltradas.addAll(alertasPorServicio);
+  public void lanzarAlertas() {
+    if (alertas.contains("tormenta")) {
+      GestorDeUsuarios.getInstancia()
+          .getUsuarios()
+          .forEach(u -> u.recibirNotificacion("Recorda llevar un paraguas"));
     }
-
-    return alertasFiltradas;
-  }
-
-  public List<String> getAlertasLanzadas() {
-    return new ArrayList<>(alertasLanzadas);
-  }
-
-  public void agregarAlerta(ServicioMeteorologico servicio, String alerta) {
-    if (alertasPendientes.get(servicio) == null) {
-      alertasPendientes.put(servicio, new ArrayList<>());
+    if (alertas.contains("granizo")) {
+      GestorDeUsuarios.getInstancia()
+          .getUsuarios()
+          .forEach(u -> u.recibirNotificacion("Evita salir con el auto"));
     }
-
-    alertasPendientes.get(servicio).add(alerta);
-  }
-
-  public void quitarAlerta(ServicioMeteorologico servicio, String alerta) {
-    alertasPendientes.get(servicio).remove(alerta);
-  }
-
-  public void dispararAlertas() {
-    for (ServicioMeteorologico servicio : alertasPendientes.keySet()) {
-      alertasLanzadas.addAll(alertasPendientes.get(servicio));
-      // alertasPendientes.get(servicio).forEach(servicio::notificar);
-    }
-
-    alertasPendientes.clear();
   }
 }

@@ -7,9 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.qmp.apis.AccuWeatherApi;
-import org.qmp.prendas.Formalidad;
 import org.qmp.prendas.Prenda;
-import org.qmp.prendas.TipoDePrenda;
+import org.qmp.prendas.atributos.Formalidad;
+import org.qmp.prendas.atributos.TipoDePrenda;
 import org.qmp.prendas.materiales.Color;
 import org.qmp.prendas.materiales.Material;
 import org.qmp.prendas.materiales.Trama;
@@ -24,7 +24,8 @@ import org.qmp.usuarios.Usuario;
 
 public class PropuestasTest {
   ServicioMeteorologico servicioMeteorologico =
-      new ServicioMeteorologicoAccuWeather(new AccuWeatherApi(), Duration.ofHours(3));
+      new ServicioMeteorologicoAccuWeather(
+          new AccuWeatherApi(), Duration.ofHours(3), "Buenos Aires");
   AsesorDeImagen asesor = new AsesorDeImagen(servicioMeteorologico);
   Sugeridor sugeridor = new SugeridorBasico();
   Usuario usuario = new Usuario(21, "email", sugeridor, asesor);

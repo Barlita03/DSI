@@ -1,4 +1,4 @@
-package org.qmp.prendas;
+package org.qmp.prendas.atributos;
 
 public enum Categoria {
   PARTE_SUPERIOR,
