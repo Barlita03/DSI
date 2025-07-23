@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.qmp.apis.AccuWeatherApi;
+import org.qmp.prendas.AsesorDeImagen;
+import org.qmp.prendas.Guardarropa;
 import org.qmp.serviciosmeteorologicos.ServicioMeteorologico;
 import org.qmp.serviciosmeteorologicos.accuweather.ServicioMeteorologicoAccuWeather;
 import org.qmp.sugeridores.Sugeridor;

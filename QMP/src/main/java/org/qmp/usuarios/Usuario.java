@@ -2,11 +2,11 @@ package org.qmp.usuarios;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.qmp.AsesorDeImagen;
-import org.qmp.Guardarropa;
 import org.qmp.notificadores.Final;
 import org.qmp.notificadores.Notificador;
+import org.qmp.prendas.AsesorDeImagen;
 import org.qmp.prendas.Atuendo;
+import org.qmp.prendas.Guardarropa;
 import org.qmp.prendas.Prenda;
 import org.qmp.propuestas.Propuesta;
 import org.qmp.sugeridores.Sugeridor;
@@ -91,7 +91,7 @@ public class Usuario {
 
   public void recibirNotificacion(String mensaje) {
     sugerenciasDiarias();
-    notificador.notificar("Mensaje");
+    notificador.notificar(mensaje);
   }
 
   public void sugerenciasDiarias() {

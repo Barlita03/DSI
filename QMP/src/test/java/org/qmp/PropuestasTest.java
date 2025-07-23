@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.qmp.apis.AccuWeatherApi;
+import org.qmp.prendas.AsesorDeImagen;
+import org.qmp.prendas.Guardarropa;
 import org.qmp.prendas.Prenda;
 import org.qmp.prendas.atributos.Formalidad;
 import org.qmp.prendas.atributos.TipoDePrenda;

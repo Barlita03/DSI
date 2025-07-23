@@ -1,7 +1,6 @@
-package org.qmp;
+package org.qmp.prendas;
 
 import java.util.List;
-import org.qmp.prendas.Atuendo;
 import org.qmp.serviciosmeteorologicos.ServicioMeteorologico;
 import org.qmp.usuarios.Usuario;
 

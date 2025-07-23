@@ -1,6 +1,6 @@
 package org.qmp.propuestas;
 
-import org.qmp.Guardarropa;
+import org.qmp.prendas.Guardarropa;
 import org.qmp.prendas.Prenda;
 
 public abstract class Propuesta {

@@ -34,8 +34,8 @@ public final class AccuWeatherApi {
   public Map<String, List<String>> getAlerts(String city) {
     return new HashMap<>() {
       {
-        put("CurrentAlerts", List.of("Granizo", "Nevada"));
-        put("PastAlerts", List.of("Frio intenso"));
+        put("CurrentAlerts", List.of("Granizo", "Tormenta"));
+        put("PastAlerts", List.of("Nevada"));
       }
     };
   }

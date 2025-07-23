@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestorDeUsuarios {
-  public static GestorDeUsuarios instancia = new GestorDeUsuarios();
-  public static List<Usuario> usuarios = new ArrayList<>();
+  private static final GestorDeUsuarios instancia = new GestorDeUsuarios();
+  private static final List<Usuario> usuarios = new ArrayList<>();
 
   // --- Getters ---
 

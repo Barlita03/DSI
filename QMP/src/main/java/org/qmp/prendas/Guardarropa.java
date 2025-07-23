@@ -1,8 +1,7 @@
-package org.qmp;
+package org.qmp.prendas;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.qmp.prendas.Prenda;
 import org.qmp.propuestas.EstadoPropuesta;
 import org.qmp.propuestas.Propuesta;
 import org.qmp.usuarios.Usuario;

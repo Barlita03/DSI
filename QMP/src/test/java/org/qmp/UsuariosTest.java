@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.qmp.alertas.GestorDeAlertas;
 import org.qmp.apis.AccuWeatherApi;
+import org.qmp.prendas.AsesorDeImagen;
 import org.qmp.prendas.Atuendo;
+import org.qmp.prendas.Guardarropa;
 import org.qmp.prendas.Prenda;
 import org.qmp.prendas.atributos.Formalidad;
 import org.qmp.prendas.atributos.TipoDePrenda;
@@ -23,7 +26,7 @@ import org.qmp.sugeridores.SugeridorPorFormalidad;
 import org.qmp.usuarios.GestorDeUsuarios;
 import org.qmp.usuarios.Usuario;
 
-public class UsuariosTests {
+public class UsuariosTest {
   ServicioMeteorologico servicioMeteorologico =
       new ServicioMeteorologicoAccuWeather(
           new AccuWeatherApi(), Duration.ofHours(3), "Buenos Aires");
@@ -194,5 +197,24 @@ public class UsuariosTests {
 
     assertEquals(1, usuario1.getSugerenciasDiarias().size());
     assertEquals(1, usuario2.getSugerenciasDiarias().size());
+  }
+
+  @Test
+  void alRecibirUnaAlertaSeActualizanLasSugerenciasDiarias() {
+    Usuario usuario1 = new Usuario(21, "email", sugeridorBasico, asesor);
+
+    Guardarropa guardarropa = new Guardarropa("Criterio", List.of(usuario1));
+    guardarropa.agregarPrenda(remera1);
+    guardarropa.agregarPrenda(pantalon1);
+    guardarropa.agregarPrenda(calzado1);
+
+    GestorDeAlertas gestorDeAlertas = new GestorDeAlertas(servicioMeteorologico);
+
+    assertEquals(0, usuario1.getSugerenciasDiarias().size());
+
+    gestorDeAlertas.actualizarAlertas();
+    gestorDeAlertas.lanzarAlertas();
+
+    assertEquals(1, usuario1.getSugerenciasDiarias().size());
   }
 }
