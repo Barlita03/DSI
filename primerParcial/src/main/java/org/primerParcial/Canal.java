@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Canal {
-  private List<Canal> suscripciones = new ArrayList<>();
+  private List<Canal> suscriptores = new ArrayList<>();
   private List<Byte> muestrasDeApoyo = new ArrayList<>();
   private List<Transmision> historicoTransmisiones = new ArrayList<>();
 
@@ -16,8 +16,12 @@ public class Canal {
 
   // --- Metodos ---
 
-  public void suscribirse(Canal canal) {
-    suscripciones.add(canal);
+  public void suscribirseA(Canal canal) {
+    canal.recibirSuscripcion(this);
+  }
+
+  public void recibirSuscripcion(Canal canal) {
+    suscriptores.add(canal);
   }
 
   public void darMuestraDeApoyo(Canal canal, Byte numero) {
@@ -50,8 +54,8 @@ public class Canal {
     return new ArrayList<>(historicoTransmisiones);
   }
 
-  public List<Canal> getSuscripciones() {
-    return new ArrayList<>(suscripciones);
+  public List<Canal> getSuscriptores() {
+    return new ArrayList<>(suscriptores);
   }
 
   public List<Byte> getMuestrasDeApoyo() {

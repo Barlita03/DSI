@@ -39,8 +39,13 @@ public class Transmision {
   }
 
   public void serIniciada() {
-    this.fechaInicio = LocalDateTime.now();
-    TransmisionesEnCurso.agregarTransmision(this);
+    if (TransmisionesEnCurso.getInstancia().getTransmisiones().stream()
+        .noneMatch(t -> t.getAutor().equals(autor))) {
+      this.fechaInicio = LocalDateTime.now();
+      TransmisionesEnCurso.agregarTransmision(this);
+    } else {
+      throw new RuntimeException("El canal ya tiene una transmision en curso");
+    }
   }
 
   public void serFinalizada() {
@@ -78,5 +83,9 @@ public class Transmision {
 
   public String getTitulo() {
     return titulo;
+  }
+
+  public Canal getAutor() {
+    return autor;
   }
 }

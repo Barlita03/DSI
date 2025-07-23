@@ -2,6 +2,7 @@ package org.primerParcial;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class parcialTests {
+public class ParcialTests {
 
   @BeforeEach
   public void setup() {
@@ -35,6 +36,29 @@ public class parcialTests {
   }
 
   @Test
+  public void unCanalPuedeTenerSoloUnaTransmisionEnCurso() {
+    Canal canal = new Canal();
+
+    Transmision transmision1 = new Transmision(canal, "transmision1");
+    Transmision transmision2 = new Transmision(canal, "transmision2");
+
+    transmision1.serIniciada();
+
+    assertThrows(RuntimeException.class, transmision2::serIniciada);
+
+    transmision1.serFinalizada();
+    transmision2.serIniciada();
+
+    assertEquals(
+        LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
+        transmision1.getFin().truncatedTo(ChronoUnit.SECONDS));
+    assertEquals(
+        LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
+        transmision2.getInicio().truncatedTo(ChronoUnit.SECONDS));
+    assertEquals(1, TransmisionesEnCurso.getInstancia().getTransmisiones().size());
+  }
+
+  @Test
   public void sePuedenListarCanales() {
     new Canal();
     new Canal();
@@ -56,11 +80,13 @@ public class parcialTests {
 
   @Test
   public void sePuedenListarLasTransmisionesEnCurso() {
-    Canal canal = new Canal();
+    Canal canal1 = new Canal();
+    Canal canal2 = new Canal();
+    Canal canal3 = new Canal();
 
-    new Transmision(canal, "transmision").serIniciada();
-    new Transmision(canal, "transmision").serIniciada();
-    new Transmision(canal, "transmision").serIniciada();
+    new Transmision(canal1, "transmision").serIniciada();
+    new Transmision(canal2, "transmision").serIniciada();
+    new Transmision(canal3, "transmision").serIniciada();
 
     assertEquals(3, TransmisionesEnCurso.getInstancia().getTransmisiones().size());
   }
@@ -70,11 +96,11 @@ public class parcialTests {
     Canal canal1 = new Canal();
     Canal canal2 = new Canal();
 
-    assertEquals(0, canal1.getSuscripciones().size());
+    assertEquals(0, canal1.getSuscriptores().size());
 
-    canal1.suscribirse(canal2);
+    canal1.suscribirseA(canal2);
 
-    assertEquals(1, canal1.getSuscripciones().size());
+    assertEquals(1, canal2.getSuscriptores().size());
   }
 
   @Test
