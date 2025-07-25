@@ -1,5 +1,7 @@
 package org.example.servicios;
 
-public class MailSender {
-  // TODO
+import org.example.Mail;
+
+public interface MailSender {
+  void send(Mail mail);
 }

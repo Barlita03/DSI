@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.listasdecorreo.ListaDeCorreo;
+
 public class PedidoDeSuscripcion {
   private final ListaDeCorreo lista;
   private final Usuario usuario;
@@ -13,12 +15,27 @@ public class PedidoDeSuscripcion {
 
   // --- Metodos ---
 
-  public void serAceptada() {
+  public void serAceptado() {
     lista.agregarMiembro(usuario);
-    // TODO: Avisar al usuario
+    notificarUsuario(
+        "Solicitud de suscripcion aceptada",
+        "Tu solicitud de suscripcion a " + lista.getDireccion() + " a sido aceptada");
+
+    salirDeLaEspera();
   }
 
-  public void serRechazada() {
-    // TODO: Avisar al usuario
+  public void serRechazado() {
+    notificarUsuario(
+        "Solicitud de suscripcion rechazada",
+        "Tu solicitud de suscripcion a " + lista.getDireccion() + " a sido rechazada");
+    salirDeLaEspera();
+  }
+
+  public void salirDeLaEspera() {
+    lista.sacarDeLaEspera(this);
+  }
+
+  public void notificarUsuario(String titulo, String texto) {
+    lista.getMailSender().send(new Mail(new Mensaje(null, titulo, texto), usuario));
   }
 }

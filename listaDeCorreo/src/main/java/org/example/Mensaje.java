@@ -18,4 +18,12 @@ public class Mensaje {
   public Usuario getOrigen() {
     return origen;
   }
+
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public String getTexto() {
+    return texto;
+  }
 }

@@ -6,7 +6,6 @@ import java.util.List;
 public class Usuario {
   private final String emailPrincipal;
   private final List<String> emails = new ArrayList<>();
-  private final List<Mensaje> casillaDeMensajes = new ArrayList<>();
 
   // --- Constructor ---
 
@@ -23,9 +22,5 @@ public class Usuario {
 
   public void quitarMail(String email) {
     emails.remove(email);
-  }
-
-  public void recibirMensaje(Mensaje mensaje) {
-    casillaDeMensajes.add(mensaje);
   }
 }
