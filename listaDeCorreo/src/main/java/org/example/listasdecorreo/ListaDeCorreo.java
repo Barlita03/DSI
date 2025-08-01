@@ -95,7 +95,7 @@ public class ListaDeCorreo {
   }
 
   public void enviarTodosLosMiembros(Mensaje mensaje) {
-      miembros.forEach(u -> u.recibirMensaje(mensaje));
+    miembros.forEach(u -> u.recibirMensaje(mensaje));
   }
 
   public void enviarTodosLosAdministradores(Mensaje mensaje) {
@@ -134,6 +134,10 @@ public class ListaDeCorreo {
     usuariosBloqueados.remove(usuario);
   }
 
+  public void limpiarBloqueados() {
+    usuariosBloqueados.clear();
+  }
+
   public List<Filtro> getFiltros() {
     return new ArrayList<>(filtros);
   }
@@ -143,6 +147,6 @@ public class ListaDeCorreo {
   }
 
   public List<Usuario> getUsuariosBloqueados() {
-    return usuariosBloqueados;
+    return new ArrayList<>(usuariosBloqueados);
   }
 }

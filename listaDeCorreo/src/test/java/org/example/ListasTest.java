@@ -33,6 +33,7 @@ public class ListasTest {
     lista.vaciarMiembros();
     lista.cambiarPrivacidad(null);
     lista.cambiarModoDeSuscripcion(null);
+    lista.limpiarBloqueados();
   }
 
   @Test
@@ -109,5 +110,24 @@ public class ListasTest {
     lista.suscribirse(usuario1);
 
     assertEquals(1, lista.getListaDeEspera().size());
+  }
+
+  @Test
+  void sePuedeBloquearAUnUsuario() {
+    assertEquals(0, lista.getUsuariosBloqueados().size());
+
+    lista.bloquearUsuario(usuario1);
+
+    assertEquals(1, lista.getUsuariosBloqueados().size());
+  }
+
+  @Test
+  void sePuedeDesbloquearAUnUsuario() {
+    lista.bloquearUsuario(usuario1);
+    assertEquals(1, lista.getUsuariosBloqueados().size());
+
+    lista.desbloquearUsuario(usuario1);
+
+    assertEquals(0, lista.getUsuariosBloqueados().size());
   }
 }

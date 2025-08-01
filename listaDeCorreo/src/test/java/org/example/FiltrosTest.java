@@ -1,5 +1,10 @@
 package org.example;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import java.util.List;
 import org.example.filtros.Filtro;
 import org.example.filtros.FiltroMalasPalabras;
 import org.example.listasdecorreo.ListaDeCorreo;
@@ -12,20 +17,14 @@ import org.example.servicios.MailSender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.junit.jupiter.resolver.CaptorParameterResolver;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class FiltrosTest {
   Filtro filtro = new FiltroMalasPalabras(List.of("palabra1", "palabra2", "palabra3"));
   Usuario usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
   Usuario usuario2 = new Usuario("pepito@gmail.com", "1131429193");
-  ListaDeCorreo lista = new ListaDeCorreo("lista@gmail.com", List.of(usuario1), List.of(usuario1, usuario2), new Libre(), null);
+  ListaDeCorreo lista =
+      new ListaDeCorreo(
+          "lista@gmail.com", List.of(usuario1), List.of(usuario1, usuario2), new Libre(), null);
   MailSender mailSender = mock(MailSender.class);
   Mensajeador mensajeador = new Emailer(mailSender);
 
@@ -81,15 +80,5 @@ public class FiltrosTest {
     lista.recibirMensaje(mensaje);
 
     assertEquals(1, lista.getUsuariosBloqueados().size());
-  }
-
-  @Test
-  void sePuedeBloquearAUnUsuario() {
-    // TODO
-  }
-
-  @Test
-  void sePuedeDesbloquearAUnUsuario() {
-    // TODO
   }
 }
