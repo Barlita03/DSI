@@ -16,7 +16,7 @@ public class ListaDeCorreo {
   private final List<Filtro> filtros = new ArrayList<>();
   private final List<Usuario> miembros = new ArrayList<>();
   private final List<Usuario> administradores = new ArrayList<>();
-  private final List<Usuario> usuarioBloqueados = new ArrayList<>();
+  private final List<Usuario> usuariosBloqueados = new ArrayList<>();
   private final List<PedidoDeSuscripcion> listaDeEspera = new ArrayList<>();
   private final HashMap<Usuario, Integer> strikes = new HashMap<Usuario, Integer>();
 
@@ -74,10 +74,6 @@ public class ListaDeCorreo {
   }
 
   public void recibirMensaje(Mensaje mensaje) {
-    privacidad.recibirMensaje(this, mensaje);
-  }
-
-  public void enviarTodosLosMiembros(Mensaje mensaje) {
     if (filtros.stream().anyMatch(f -> f.cumple(mensaje.getTexto()))) {
       enviarTodosLosAdministradores(
           new Mensaje(
@@ -94,8 +90,12 @@ public class ListaDeCorreo {
         strikes.put(mensaje.getOrigen(), 0);
       }
     } else {
-      miembros.forEach(u -> u.recibirMensaje(mensaje));
+      privacidad.recibirMensaje(this, mensaje);
     }
+  }
+
+  public void enviarTodosLosMiembros(Mensaje mensaje) {
+      miembros.forEach(u -> u.recibirMensaje(mensaje));
   }
 
   public void enviarTodosLosAdministradores(Mensaje mensaje) {
@@ -127,10 +127,22 @@ public class ListaDeCorreo {
   }
 
   public void bloquearUsuario(Usuario usuario) {
-    usuarioBloqueados.add(usuario);
+    usuariosBloqueados.add(usuario);
   }
 
   public void desbloquearUsuario(Usuario usuario) {
-    usuarioBloqueados.remove(usuario);
+    usuariosBloqueados.remove(usuario);
+  }
+
+  public List<Filtro> getFiltros() {
+    return new ArrayList<>(filtros);
+  }
+
+  public HashMap<Usuario, Integer> getStrikes() {
+    return new HashMap<>(strikes);
+  }
+
+  public List<Usuario> getUsuariosBloqueados() {
+    return usuariosBloqueados;
   }
 }
