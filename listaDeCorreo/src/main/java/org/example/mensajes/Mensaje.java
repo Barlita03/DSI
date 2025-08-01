@@ -1,7 +1,12 @@
-package org.example;
+package org.example.mensajes;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.example.Usuario;
 
 public class Mensaje {
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2")
   private final Usuario origen;
+
   private final String titulo;
   private final String texto;
 
@@ -15,6 +20,7 @@ public class Mensaje {
 
   // --- Getters ---
 
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP")
   public Usuario getOrigen() {
     return origen;
   }

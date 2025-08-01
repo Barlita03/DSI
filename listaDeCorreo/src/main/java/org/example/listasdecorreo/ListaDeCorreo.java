@@ -1,36 +1,38 @@
 package org.example.listasdecorreo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import org.example.Mail;
-import org.example.Mensaje;
-import org.example.PedidoDeSuscripcion;
 import org.example.Usuario;
+import org.example.filtros.Filtro;
 import org.example.listasdecorreo.modosdesuscripcion.ModoDeSuscripcion;
 import org.example.listasdecorreo.privacidad.Privacidad;
-import org.example.servicios.MailSender;
+import org.example.mensajes.Mensaje;
 
 public class ListaDeCorreo {
-  private final String direccion;
-  private final List<Usuario> miembros = new ArrayList<>();
-  private final List<PedidoDeSuscripcion> listaDeEspera = new ArrayList<>();
-  private MailSender mailSender;
   private Privacidad privacidad;
+  private final String direccion;
   private ModoDeSuscripcion modoDeSuscripcion;
+  private final List<Filtro> filtros = new ArrayList<>();
+  private final List<Usuario> miembros = new ArrayList<>();
+  private final List<Usuario> administradores = new ArrayList<>();
+  private final List<Usuario> usuarioBloqueados = new ArrayList<>();
+  private final List<PedidoDeSuscripcion> listaDeEspera = new ArrayList<>();
+  private final HashMap<Usuario, Integer> strikes = new HashMap<Usuario, Integer>();
 
   // --- Constructor ---
 
   public ListaDeCorreo(
       String direccion,
+      List<Usuario> administradores,
       List<Usuario> miembros,
       Privacidad privacidad,
-      ModoDeSuscripcion modoDeSuscripcion,
-      MailSender mailSender) {
+      ModoDeSuscripcion modoDeSuscripcion) {
     this.direccion = direccion;
     this.privacidad = privacidad;
     this.modoDeSuscripcion = modoDeSuscripcion;
     this.miembros.addAll(miembros);
-    this.mailSender = mailSender;
+    this.administradores.addAll(administradores);
   }
 
   // --- Metodos ---
@@ -41,10 +43,6 @@ public class ListaDeCorreo {
 
   public String getDireccion() {
     return direccion;
-  }
-
-  public MailSender getMailSender() {
-    return mailSender;
   }
 
   public List<PedidoDeSuscripcion> getListaDeEspera() {
@@ -80,7 +78,28 @@ public class ListaDeCorreo {
   }
 
   public void enviarTodosLosMiembros(Mensaje mensaje) {
-    miembros.forEach(u -> mailSender.send(new Mail(mensaje, u)));
+    if (filtros.stream().anyMatch(f -> f.cumple(mensaje.getTexto()))) {
+      enviarTodosLosAdministradores(
+          new Mensaje(
+              null,
+              "Violacion de los filtros detectada",
+              "El usuario "
+                  + mensaje.getOrigen().getEmailPrincipal()
+                  + " ah enviado un mensaje que no cumple con los filtros establecidos"));
+
+      strikes.put(mensaje.getOrigen(), strikes.getOrDefault(mensaje.getOrigen(), 0) + 1);
+
+      if (strikes.get(mensaje.getOrigen()) >= 5) {
+        bloquearUsuario(mensaje.getOrigen());
+        strikes.put(mensaje.getOrigen(), 0);
+      }
+    } else {
+      miembros.forEach(u -> u.recibirMensaje(mensaje));
+    }
+  }
+
+  public void enviarTodosLosAdministradores(Mensaje mensaje) {
+    administradores.forEach(u -> u.recibirMensaje(mensaje));
   }
 
   public boolean esMiembro(Usuario usuario) {
@@ -93,5 +112,25 @@ public class ListaDeCorreo {
 
   public void cambiarModoDeSuscripcion(ModoDeSuscripcion modoDeSuscripcion) {
     this.modoDeSuscripcion = modoDeSuscripcion;
+  }
+
+  public void agregarFiltro(Filtro filtro) {
+    filtros.add(filtro);
+  }
+
+  public void removerFiltro(Filtro filtro) {
+    filtros.remove(filtro);
+  }
+
+  public void quitarTodosLosFiltros() {
+    filtros.clear();
+  }
+
+  public void bloquearUsuario(Usuario usuario) {
+    usuarioBloqueados.add(usuario);
+  }
+
+  public void desbloquearUsuario(Usuario usuario) {
+    usuarioBloqueados.remove(usuario);
   }
 }

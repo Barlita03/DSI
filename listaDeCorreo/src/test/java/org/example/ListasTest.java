@@ -11,6 +11,9 @@ import org.example.listasdecorreo.ListaDeCorreo;
 import org.example.listasdecorreo.modosdesuscripcion.Abierta;
 import org.example.listasdecorreo.modosdesuscripcion.Cerrada;
 import org.example.listasdecorreo.privacidad.Privada;
+import org.example.mensajes.Mail;
+import org.example.mensajes.Mensaje;
+import org.example.mensajes.mensajeadores.Emailer;
 import org.example.servicios.MailSender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,12 +21,15 @@ import org.mockito.ArgumentCaptor;
 
 public class ListasTest {
   MailSender mailSender = mock(MailSender.class);
-  ListaDeCorreo lista = new ListaDeCorreo("lista@gmail.com", List.of(), null, null, mailSender);
-  Usuario usuario1 = new Usuario("jorgito@gmail.com");
-  Usuario usuario2 = new Usuario("pepito@gmail.com");
+  ListaDeCorreo lista = new ListaDeCorreo("lista@gmail.com", List.of(), List.of(), null, null);
+  Usuario usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
+  Usuario usuario2 = new Usuario("pepito@gmail.com", "1131429193");
+  Emailer mensajeador = new Emailer(mailSender);
 
   @BeforeEach
   void setup() {
+    usuario1.setMensajeador(mensajeador);
+    usuario2.setMensajeador(mensajeador);
     lista.vaciarMiembros();
     lista.cambiarPrivacidad(null);
     lista.cambiarModoDeSuscripcion(null);

@@ -1,8 +1,8 @@
 package org.example.listasdecorreo.modosdesuscripcion;
 
-import org.example.PedidoDeSuscripcion;
 import org.example.Usuario;
 import org.example.listasdecorreo.ListaDeCorreo;
+import org.example.listasdecorreo.PedidoDeSuscripcion;
 
 public class Cerrada implements ModoDeSuscripcion {
   @Override

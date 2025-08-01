@@ -1,7 +1,7 @@
 package org.example.listasdecorreo.privacidad;
 
-import org.example.Mensaje;
 import org.example.listasdecorreo.ListaDeCorreo;
+import org.example.mensajes.Mensaje;
 
 public class Libre implements Privacidad {
   @Override

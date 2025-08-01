@@ -7,16 +7,26 @@ import static org.mockito.Mockito.verify;
 
 import java.util.List;
 import org.example.listasdecorreo.ListaDeCorreo;
+import org.example.listasdecorreo.PedidoDeSuscripcion;
 import org.example.listasdecorreo.modosdesuscripcion.Cerrada;
+import org.example.mensajes.Mail;
+import org.example.mensajes.mensajeadores.Emailer;
 import org.example.servicios.MailSender;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 public class PedidoDeSuscripcionTest {
   MailSender mailSender = mock(MailSender.class);
   ListaDeCorreo lista =
-      new ListaDeCorreo("lista@gmail.com", List.of(), null, new Cerrada(), mailSender);
-  Usuario usuario = new Usuario("jorgito@gmail.com");
+      new ListaDeCorreo("lista@gmail.com", List.of(), List.of(), null, new Cerrada());
+  Usuario usuario = new Usuario("jorgito@gmail.com", "1131429193");
+  Emailer mensajeador = new Emailer(mailSender);
+
+  @BeforeEach
+  void setup() {
+    usuario.setMensajeador(mensajeador);
+  }
 
   @Test
   void unPedidoDeSuscripcionPuedeSerAceptado() {

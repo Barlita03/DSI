@@ -1,9 +1,14 @@
-package org.example;
+package org.example.listasdecorreo;
 
-import org.example.listasdecorreo.ListaDeCorreo;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.example.Usuario;
+import org.example.mensajes.Mensaje;
 
 public class PedidoDeSuscripcion {
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2")
   private final ListaDeCorreo lista;
+
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2")
   private final Usuario usuario;
 
   // --- Constructor ---
@@ -36,6 +41,6 @@ public class PedidoDeSuscripcion {
   }
 
   public void notificarUsuario(String titulo, String texto) {
-    lista.getMailSender().send(new Mail(new Mensaje(null, titulo, texto), usuario));
+    usuario.recibirMensaje(new Mensaje(null, titulo, texto));
   }
 }
