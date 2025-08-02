@@ -1,18 +1,16 @@
 package org.example.listasdecorreo;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.example.Usuario;
 import org.example.filtros.Filtro;
 import org.example.listasdecorreo.modosdesuscripcion.ModoDeSuscripcion;
 import org.example.listasdecorreo.privacidad.Privacidad;
 import org.example.mensajes.Borrador;
-import org.example.mensajes.Mensaje;
 
 public class ListaDeCorreo {
   private String prefijo;
