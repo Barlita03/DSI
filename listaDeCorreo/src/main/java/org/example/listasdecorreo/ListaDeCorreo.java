@@ -9,17 +9,18 @@ import java.util.Map;
 import org.example.Usuario;
 import org.example.filtros.Filtro;
 import org.example.listasdecorreo.modosdesuscripcion.ModoDeSuscripcion;
+import org.example.listasdecorreo.privacidad.Libre;
 import org.example.listasdecorreo.privacidad.Privacidad;
 import org.example.mensajes.Borrador;
 
 public class ListaDeCorreo {
   private String prefijo;
   private String pieDePagina;
-  private Privacidad privacidad;
   private ModoDeSuscripcion modoDeSuscripcion;
   private final String direccion;
   private final List<Filtro> filtros = new ArrayList<>();
   private final List<Usuario> miembros = new ArrayList<>();
+  private final List<Privacidad> privacidad = new ArrayList<>();
   private final List<Usuario> administradores = new ArrayList<>();
   private final List<Usuario> usuariosModerados = new ArrayList<>();
   private final List<Usuario> usuariosBloqueados = new ArrayList<>();
@@ -34,10 +35,10 @@ public class ListaDeCorreo {
       String direccion,
       List<Usuario> administradores,
       List<Usuario> miembros,
-      Privacidad privacidad,
+      List<Privacidad> privacidad,
       ModoDeSuscripcion modoDeSuscripcion) {
     this.direccion = direccion;
-    this.privacidad = privacidad;
+    this.privacidad.addAll(privacidad);
     this.modoDeSuscripcion = modoDeSuscripcion;
     this.miembros.addAll(miembros);
     this.administradores.addAll(administradores);
@@ -100,7 +101,11 @@ public class ListaDeCorreo {
       }
     } else {
       modificarBorrador(borrador);
-      privacidad.recibirMensaje(this, borrador);
+      if (privacidad.isEmpty()) {
+        new Libre().recibirMensaje(this, borrador);
+      } else {
+        privacidad.forEach(p -> p.recibirMensaje(this, borrador));
+      }
     }
   }
 
@@ -130,8 +135,12 @@ public class ListaDeCorreo {
     return miembros.contains(usuario);
   }
 
-  public void cambiarPrivacidad(Privacidad privacidad) {
-    this.privacidad = privacidad;
+  public void agregarPrivacidad(Privacidad privacidad) {
+    this.privacidad.add(privacidad);
+  }
+
+  public void quitarPrivacidad(Privacidad privacidad) {
+    this.privacidad.remove(privacidad);
   }
 
   public void cambiarModoDeSuscripcion(ModoDeSuscripcion modoDeSuscripcion) {
@@ -203,7 +212,7 @@ public class ListaDeCorreo {
     }
   }
 
-  public void agregarMensajeAEspera(MensajeModerado mensaje) {
+  public void agregarMensajeEspera(MensajeModerado mensaje) {
     mensajesEnEspera.add(mensaje);
   }
 
@@ -212,7 +221,7 @@ public class ListaDeCorreo {
   }
 
   public List<MensajeModerado> getMensajesEnEspera() {
-    return mensajesEnEspera;
+    return new ArrayList<>(mensajesEnEspera);
   }
 
   @SuppressFBWarnings(value = "EI_EXPOSE_REP")
@@ -230,5 +239,9 @@ public class ListaDeCorreo {
 
   public List<Usuario> getNuevosUsuarios() {
     return nuevosUsuarios.keySet().stream().toList();
+  }
+
+  public void limpiarPrivacidad() {
+    privacidad.clear();
   }
 }

@@ -11,7 +11,6 @@ import java.util.List;
 import org.example.listasdecorreo.ListaDeCorreo;
 import org.example.listasdecorreo.modosdesuscripcion.Abierta;
 import org.example.listasdecorreo.modosdesuscripcion.Cerrada;
-import org.example.listasdecorreo.privacidad.Libre;
 import org.example.listasdecorreo.privacidad.Privada;
 import org.example.mensajes.Borrador;
 import org.example.mensajes.Mensaje;
@@ -23,7 +22,7 @@ import org.mockito.ArgumentCaptor;
 
 public class ListasTest {
   MailSender mailSender = mock(MailSender.class);
-  ListaDeCorreo lista = new ListaDeCorreo("lista@gmail.com", List.of(), List.of(), null, null);
+  ListaDeCorreo lista = new ListaDeCorreo("lista@gmail.com", List.of(), List.of(), List.of(), null);
   Usuario usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
   Usuario usuario2 = new Usuario("pepito@gmail.com", "1131429193");
 
@@ -34,7 +33,7 @@ public class ListasTest {
     usuario1.setMensajeador(mensajeador);
     usuario2.setMensajeador(mensajeador);
     lista.vaciarMiembros();
-    lista.cambiarPrivacidad(null);
+    lista.limpiarPrivacidad();
     lista.cambiarModoDeSuscripcion(null);
     lista.limpiarBloqueados();
   }
@@ -68,7 +67,7 @@ public class ListasTest {
 
   @Test
   void puedoEnviarUnMensajeAUnaListaPrivadaSiSoyMiembro() {
-    lista.cambiarPrivacidad(new Privada());
+    lista.agregarPrivacidad(new Privada());
     lista.agregarMiembro(usuario1);
     lista.agregarMiembro(usuario2);
 
@@ -87,7 +86,7 @@ public class ListasTest {
 
   @Test
   void noPuedoEnviarUnMensajeAUnaListaPrivadaSiNoSoyMiembro() {
-    lista.cambiarPrivacidad(new Privada());
+    lista.agregarPrivacidad(new Privada());
     lista.agregarMiembro(usuario1);
 
     assertThrows(
@@ -137,7 +136,6 @@ public class ListasTest {
   @Test
   void seAgregaElPrefijoALosMensajesEnviados() {
     lista.setPrefijo("prefijo");
-    lista.cambiarPrivacidad(new Libre());
     lista.cambiarModoDeSuscripcion(new Abierta());
     lista.suscribirse(usuario2);
 
@@ -149,7 +147,6 @@ public class ListasTest {
   @Test
   void seAgregaElPieDePaginaALosMensajesEnviados() {
     lista.setPieDePagina("pie de pagina");
-    lista.cambiarPrivacidad(new Libre());
     lista.cambiarModoDeSuscripcion(new Abierta());
     lista.suscribirse(usuario2);
 
@@ -162,7 +159,6 @@ public class ListasTest {
   void sePuedenConvinarPieDePaginaYPrefijo() {
     lista.setPrefijo("prefijo");
     lista.setPieDePagina("pie de pagina");
-    lista.cambiarPrivacidad(new Libre());
     lista.cambiarModoDeSuscripcion(new Abierta());
     lista.suscribirse(usuario2);
 

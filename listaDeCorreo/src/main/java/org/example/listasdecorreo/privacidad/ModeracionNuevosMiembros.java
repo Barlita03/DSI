@@ -6,10 +6,10 @@ import org.example.mensajes.Borrador;
 
 public class ModeracionNuevosMiembros extends Moderada {
   @Override
-  public void recibirMensaje(ListaDeCorreo lista, Borrador borrador) {
+  public void aplicar(ListaDeCorreo lista, Borrador borrador) {
     if (lista.getNuevosUsuarios().contains(borrador.getOrigen())) {
-      lista.agregarMensajeAEspera(new MensajeModerado(lista, borrador));
-      super.recibirMensaje(lista, borrador);
+      lista.agregarMensajeEspera(new MensajeModerado(lista, borrador));
+      notificarAdministradores(lista, borrador.getOrigen().getEmailPrincipal());
     } else {
       lista.recibirMensaje(borrador);
     }

@@ -8,7 +8,6 @@ import java.util.List;
 import org.example.filtros.Filtro;
 import org.example.filtros.FiltroMalasPalabras;
 import org.example.listasdecorreo.ListaDeCorreo;
-import org.example.listasdecorreo.privacidad.Libre;
 import org.example.mensajes.Borrador;
 import org.example.mensajes.Mensaje;
 import org.example.mensajes.mensajeadores.Emailer;
@@ -25,7 +24,7 @@ public class FiltrosTest {
 
   ListaDeCorreo lista =
       new ListaDeCorreo(
-          "lista@gmail.com", List.of(usuario1), List.of(usuario1, usuario2), new Libre(), null);
+          "lista@gmail.com", List.of(usuario1), List.of(usuario1, usuario2), List.of(), null);
   MailSender mailSender = mock(MailSender.class);
   Mensajeador mensajeador = new Emailer(mailSender);
 

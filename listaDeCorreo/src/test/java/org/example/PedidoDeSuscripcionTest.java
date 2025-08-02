@@ -21,7 +21,7 @@ public class PedidoDeSuscripcionTest {
   Usuario usuario2 = new Usuario("pepito@gmail.com", "1131429193");
 
   ListaDeCorreo lista =
-      new ListaDeCorreo("lista@gmail.com", List.of(usuario2), List.of(), null, new Cerrada());
+      new ListaDeCorreo("lista@gmail.com", List.of(usuario2), List.of(), List.of(), new Cerrada());
   Emailer mensajeador = new Emailer(mailSender);
 
   @BeforeEach
