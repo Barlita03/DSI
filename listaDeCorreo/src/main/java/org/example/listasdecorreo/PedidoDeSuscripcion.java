@@ -43,6 +43,6 @@ public class PedidoDeSuscripcion {
 
   public void notificarUsuario(String titulo, String texto) {
     usuario.recibirMensaje(
-        new Mensaje(new Borrador(lista.getAdministradores().get(0), titulo, texto), usuario));
+        new Mensaje(new Borrador(new Usuario("sistema@gmail.com", null), titulo, texto), usuario));
   }
 }

@@ -11,7 +11,9 @@ import java.util.List;
 import org.example.listasdecorreo.ListaDeCorreo;
 import org.example.listasdecorreo.modosdesuscripcion.Abierta;
 import org.example.listasdecorreo.modosdesuscripcion.Cerrada;
+import org.example.listasdecorreo.privacidad.Libre;
 import org.example.listasdecorreo.privacidad.Privada;
+import org.example.listasdecorreo.privacidad.moderada.ModeracionNoMiembros;
 import org.example.mensajes.Borrador;
 import org.example.mensajes.Mensaje;
 import org.example.mensajes.mensajeadores.Emailer;
@@ -168,5 +170,31 @@ public class ListasTest {
 
     assertTrue(usuario2.getCasillaDeMensajes().get(0).getTexto().contains("prefijo"));
     assertTrue(usuario2.getCasillaDeMensajes().get(0).getTexto().contains("pie de pagina"));
+  }
+
+  @Test
+  void siUnNoMiembroEnviaUnMensajeConPrivacidadModeradaNoMiembrosElMensajeQuedaEnEspera() {
+    lista.agregarPrivacidad(new ModeracionNoMiembros());
+    lista.cambiarModoDeSuscripcion(new Abierta());
+    lista.suscribirse(usuario2);
+
+    lista.recibirMensaje(new Borrador(usuario1, "titulo", "texto"));
+    lista.recibirMensaje(new Borrador(usuario2, "titulo", "texto"));
+
+    assertEquals(1, lista.getMensajesEnEspera().size());
+    assertEquals(usuario1, lista.getMensajesEnEspera().get(0).getBorrador().getOrigen());
+  }
+
+  @Test
+  void siUnMiembroModeradoEnviaUnMensajeConPrivacidadModeradaMiembrosEspecificosElMensajeQuedaEnEspera() {
+    lista.agregarPrivacidad(new ModeracionNoMiembros());
+    lista.cambiarModoDeSuscripcion(new Abierta());
+    lista.suscribirse(usuario2);
+
+    lista.recibirMensaje(new Borrador(usuario1, "titulo", "texto"));
+    lista.recibirMensaje(new Borrador(usuario2, "titulo", "texto"));
+
+    assertEquals(1, lista.getMensajesEnEspera().size());
+    assertEquals(usuario1, lista.getMensajesEnEspera().get(0).getBorrador().getOrigen());
   }
 }

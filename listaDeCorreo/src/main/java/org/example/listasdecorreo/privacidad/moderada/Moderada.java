@@ -1,7 +1,9 @@
-package org.example.listasdecorreo.privacidad;
+package org.example.listasdecorreo.privacidad.moderada;
 
+import org.example.Usuario;
 import org.example.listasdecorreo.ListaDeCorreo;
 import org.example.listasdecorreo.MensajeModerado;
+import org.example.listasdecorreo.privacidad.Privacidad;
 import org.example.mensajes.Borrador;
 
 public abstract class Moderada implements Privacidad {
@@ -18,7 +20,7 @@ public abstract class Moderada implements Privacidad {
   protected void notificarAdministradores(ListaDeCorreo lista, String direccionUsuario) {
     lista.enviarTodosLosAdministradores(
         new Borrador(
-            lista.getAdministradores().get(0),
+            new Usuario("sistema@gmail.com", null),
             "Nuevo mensaje pendiente de moderacion",
             "El usuario "
                 + direccionUsuario

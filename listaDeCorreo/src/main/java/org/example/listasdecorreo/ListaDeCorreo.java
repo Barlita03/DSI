@@ -24,10 +24,10 @@ public class ListaDeCorreo {
   private final List<Usuario> administradores = new ArrayList<>();
   private final List<Usuario> usuariosModerados = new ArrayList<>();
   private final List<Usuario> usuariosBloqueados = new ArrayList<>();
-  private final List<MensajeModerado> mensajesEnEspera = new ArrayList<>();
   private final List<PedidoDeSuscripcion> listaDeEspera = new ArrayList<>();
   private final HashMap<Usuario, Integer> strikes = new HashMap<>();
   private final HashMap<Usuario, LocalDate> nuevosUsuarios = new HashMap<>();
+  private final HashMap<MensajeModerado, LocalDate> mensajesEnEspera = new HashMap<>();
 
   // --- Constructor ---
 
@@ -204,6 +204,7 @@ public class ListaDeCorreo {
     return new ArrayList<>(administradores);
   }
 
+  // Estos metodos se ejecutan con un CRON
   public void actualizarNuevos() {
     for (Map.Entry<Usuario, LocalDate> entry : nuevosUsuarios.entrySet()) {
       if (entry.getValue().plusDays(5).isBefore(LocalDate.now())) {
@@ -212,8 +213,16 @@ public class ListaDeCorreo {
     }
   }
 
+  public void actualizarMensajesEnEspera() {
+    for (Map.Entry<MensajeModerado, LocalDate> entry : mensajesEnEspera.entrySet()) {
+      if (entry.getValue().plusDays(5).isBefore(LocalDate.now())) {
+        mensajesEnEspera.remove(entry.getKey());
+      }
+    }
+  }
+
   public void agregarMensajeEspera(MensajeModerado mensaje) {
-    mensajesEnEspera.add(mensaje);
+    mensajesEnEspera.put(mensaje, LocalDate.now());
   }
 
   public void quitarMensajeDeLaEspera(MensajeModerado mensaje) {
@@ -221,7 +230,7 @@ public class ListaDeCorreo {
   }
 
   public List<MensajeModerado> getMensajesEnEspera() {
-    return new ArrayList<>(mensajesEnEspera);
+    return mensajesEnEspera.keySet().stream().toList();
   }
 
   @SuppressFBWarnings(value = "EI_EXPOSE_REP")
