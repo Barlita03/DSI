@@ -1,13 +1,18 @@
 package org.example.listasdecorreo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.example.Usuario;
 import org.example.filtros.Filtro;
 import org.example.listasdecorreo.modosdesuscripcion.ModoDeSuscripcion;
 import org.example.listasdecorreo.privacidad.Privacidad;
 import org.example.mensajes.Borrador;
+import org.example.mensajes.Mensaje;
 
 public class ListaDeCorreo {
   private String prefijo;
@@ -18,9 +23,12 @@ public class ListaDeCorreo {
   private final List<Filtro> filtros = new ArrayList<>();
   private final List<Usuario> miembros = new ArrayList<>();
   private final List<Usuario> administradores = new ArrayList<>();
+  private final List<Usuario> usuariosModerados = new ArrayList<>();
   private final List<Usuario> usuariosBloqueados = new ArrayList<>();
+  private final List<MensajeModerado> mensajesEnEspera = new ArrayList<>();
   private final List<PedidoDeSuscripcion> listaDeEspera = new ArrayList<>();
-  private final HashMap<Usuario, Integer> strikes = new HashMap<Usuario, Integer>();
+  private final HashMap<Usuario, Integer> strikes = new HashMap<>();
+  private final HashMap<Usuario, LocalDate> nuevosUsuarios = new HashMap<>();
 
   // --- Constructor ---
 
@@ -69,6 +77,7 @@ public class ListaDeCorreo {
 
   public void agregarMiembro(Usuario usuario) {
     miembros.add(usuario);
+    nuevosUsuarios.put(usuario, LocalDate.now());
   }
 
   public void quitarMiembro(Usuario usuario) {
@@ -186,5 +195,38 @@ public class ListaDeCorreo {
 
   public List<Usuario> getAdministradores() {
     return new ArrayList<>(administradores);
+  }
+
+  public void actualizarNuevos() {
+    for (Map.Entry<Usuario, LocalDate> entry : nuevosUsuarios.entrySet()) {
+      if (entry.getValue().plusDays(5).isBefore(LocalDate.now())) {
+        nuevosUsuarios.remove(entry.getKey());
+      }
+    }
+  }
+
+  public void agregarMensajeAEspera(MensajeModerado mensaje) {
+    mensajesEnEspera.add(mensaje);
+  }
+
+  public void quitarMensajeDeLaEspera(MensajeModerado mensaje) {
+    mensajesEnEspera.remove(mensaje);
+  }
+
+  public List<MensajeModerado> getMensajesEnEspera() {
+    return mensajesEnEspera;
+  }
+
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP")
+  public List<Usuario> getUsuariosModerados() {
+    return usuariosModerados;
+  }
+
+  public void agregarUsuarioModerado(Usuario usuario) {
+    usuariosModerados.add(usuario);
+  }
+
+  public void quitarUsuarioModerado(Usuario usuario) {
+    usuariosModerados.remove(usuario);
   }
 }
