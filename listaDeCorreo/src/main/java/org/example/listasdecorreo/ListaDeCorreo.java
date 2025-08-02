@@ -229,4 +229,8 @@ public class ListaDeCorreo {
   public void quitarUsuarioModerado(Usuario usuario) {
     usuariosModerados.remove(usuario);
   }
+
+  public List<Usuario> getNuevosUsuarios() {
+    return nuevosUsuarios.keySet().stream().toList();
+  }
 }
