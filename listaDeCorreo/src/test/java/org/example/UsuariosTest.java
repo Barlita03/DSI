@@ -1,5 +1,6 @@
 package org.example;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -16,15 +17,7 @@ import org.example.servicios.PhoneVoiceSender;
 import org.junit.jupiter.api.Test;
 
 public class UsuariosTest {
-  Usuario usuario;
-
-  {
-    try {
-      usuario = new Usuario("jorgito@gmail.com", "1131429193");
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
-  }
+  Usuario usuario = new Usuario("jorgito@gmail.com", "1131429193");
 
   MailSender mailSender = mock(MailSender.class);
   PhoneTextSender phoneTextSender = mock(PhoneTextSender.class);
@@ -74,5 +67,14 @@ public class UsuariosTest {
     verify(mailSender).send(any());
     verify(phoneTextSender).sendMessage(usuario.getTelefono(), mensaje.getTexto());
     verify(phoneVoiceSender).sendMessage(usuario.getTelefono(), mensaje.getTexto(), 10);
+  }
+
+  @Test
+  void laFirmaDeUnUsuarioSeAgregaAutomaticamenteASusMensajes() {
+    usuario.setFirma("firma");
+
+    Borrador borrador = new Borrador(usuario, "titulo", "texto");
+
+    assertTrue(borrador.getTexto().contains("firma"));
   }
 }

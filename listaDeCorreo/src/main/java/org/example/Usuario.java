@@ -2,6 +2,7 @@ package org.example;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Usuario {
   private final String emailPrincipal;
   private final String telefono;
   private final List<String> emails = new ArrayList<>();
+  private final List<Mensaje> casillaDeMensajes = new ArrayList<>();
   private Mensajeador mensajeador;
   private String firma;
 
@@ -21,12 +23,17 @@ public class Usuario {
 
   // --- Constructor ---
 
-  public Usuario(String emailPrincipal, String telefono) throws Exception {
+  public Usuario(String emailPrincipal, String telefono) {
     this.emailPrincipal = emailPrincipal;
     this.telefono = telefono;
     emails.add(emailPrincipal);
 
-    KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+    KeyPairGenerator keyGen = null;
+    try {
+      keyGen = KeyPairGenerator.getInstance("RSA");
+    } catch (NoSuchAlgorithmException e) {
+      throw new RuntimeException(e);
+    }
     keyGen.initialize(2048);
     KeyPair pair = keyGen.generateKeyPair();
     this.clavePrivada = pair.getPrivate();
@@ -45,6 +52,7 @@ public class Usuario {
 
   public void recibirMensaje(Mensaje mensaje) {
     mensajeador.enviarMensaje(mensaje, this);
+    casillaDeMensajes.add(mensaje.desencriptarTexto(clavePrivada));
   }
 
   public void setMensajeador(Mensajeador mensajeador) {
@@ -69,5 +77,9 @@ public class Usuario {
 
   public PublicKey getClavePublica() {
     return clavePublica;
+  }
+
+  public List<Mensaje> getCasillaDeMensajes() {
+    return new ArrayList<>(casillaDeMensajes);
   }
 }

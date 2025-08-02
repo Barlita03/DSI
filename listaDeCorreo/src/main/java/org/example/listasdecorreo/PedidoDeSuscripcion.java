@@ -21,7 +21,7 @@ public class PedidoDeSuscripcion {
 
   // --- Metodos ---
 
-  public void serAceptado() throws Exception {
+  public void serAceptado() {
     lista.agregarMiembro(usuario);
     notificarUsuario(
         "Solicitud de suscripcion aceptada",
@@ -30,7 +30,7 @@ public class PedidoDeSuscripcion {
     salirDeLaEspera();
   }
 
-  public void serRechazado() throws Exception {
+  public void serRechazado() {
     notificarUsuario(
         "Solicitud de suscripcion rechazada",
         "Tu solicitud de suscripcion a " + lista.getDireccion() + " a sido rechazada");
@@ -41,7 +41,7 @@ public class PedidoDeSuscripcion {
     lista.sacarDeLaEspera(this);
   }
 
-  public void notificarUsuario(String titulo, String texto) throws Exception {
+  public void notificarUsuario(String titulo, String texto) {
     usuario.recibirMensaje(
         new Mensaje(new Borrador(lista.getAdministradores().get(0), titulo, texto), usuario));
   }

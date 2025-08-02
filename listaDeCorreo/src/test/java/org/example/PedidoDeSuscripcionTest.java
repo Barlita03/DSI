@@ -17,17 +17,8 @@ import org.mockito.ArgumentCaptor;
 
 public class PedidoDeSuscripcionTest {
   MailSender mailSender = mock(MailSender.class);
-  Usuario usuario1;
-  Usuario usuario2;
-
-  {
-    try {
-      usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
-      usuario2 = new Usuario("pepito@gmail.com", "1131429193");
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
-  }
+  Usuario usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
+  Usuario usuario2 = new Usuario("pepito@gmail.com", "1131429193");
 
   ListaDeCorreo lista =
       new ListaDeCorreo("lista@gmail.com", List.of(usuario2), List.of(), null, new Cerrada());
@@ -39,7 +30,7 @@ public class PedidoDeSuscripcionTest {
   }
 
   @Test
-  void unPedidoDeSuscripcionPuedeSerAceptado() throws Exception {
+  void unPedidoDeSuscripcionPuedeSerAceptado() {
     lista.suscribirse(usuario1);
     PedidoDeSuscripcion pedido = lista.getListaDeEspera().get(0);
     pedido.serAceptado();
@@ -54,7 +45,7 @@ public class PedidoDeSuscripcionTest {
   }
 
   @Test
-  void unPedidoDeSuscripcionPuedeSerRechazado() throws Exception {
+  void unPedidoDeSuscripcionPuedeSerRechazado() {
     lista.suscribirse(usuario1);
     PedidoDeSuscripcion pedido = lista.getListaDeEspera().get(0);
     pedido.serRechazado();

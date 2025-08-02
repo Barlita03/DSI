@@ -2,6 +2,7 @@ package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -10,6 +11,7 @@ import java.util.List;
 import org.example.listasdecorreo.ListaDeCorreo;
 import org.example.listasdecorreo.modosdesuscripcion.Abierta;
 import org.example.listasdecorreo.modosdesuscripcion.Cerrada;
+import org.example.listasdecorreo.privacidad.Libre;
 import org.example.listasdecorreo.privacidad.Privada;
 import org.example.mensajes.Borrador;
 import org.example.mensajes.Mensaje;
@@ -22,17 +24,8 @@ import org.mockito.ArgumentCaptor;
 public class ListasTest {
   MailSender mailSender = mock(MailSender.class);
   ListaDeCorreo lista = new ListaDeCorreo("lista@gmail.com", List.of(), List.of(), null, null);
-  Usuario usuario1;
-  Usuario usuario2;
-
-  {
-    try {
-      usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
-      usuario2 = new Usuario("pepito@gmail.com", "1131429193");
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
-  }
+  Usuario usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
+  Usuario usuario2 = new Usuario("pepito@gmail.com", "1131429193");
 
   Emailer mensajeador = new Emailer(mailSender);
 
@@ -139,5 +132,45 @@ public class ListasTest {
     lista.desbloquearUsuario(usuario1);
 
     assertEquals(0, lista.getUsuariosBloqueados().size());
+  }
+
+  @Test
+  void seAgregaElPrefijoALosMensajesEnviados() {
+    lista.setPrefijo("prefijo");
+    lista.cambiarPrivacidad(new Libre());
+    lista.cambiarModoDeSuscripcion(new Abierta());
+    lista.suscribirse(usuario2);
+
+    lista.recibirMensaje(new Borrador(usuario1, "titulo", "texto"));
+
+    assertTrue(usuario2.getCasillaDeMensajes().get(0).getTexto().contains("prefijo"));
+  }
+
+  @Test
+  void seAgregaElPieDePaginaALosMensajesEnviados() {
+    lista.setPieDePagina("pie de pagina");
+    lista.cambiarPrivacidad(new Libre());
+    lista.cambiarModoDeSuscripcion(new Abierta());
+    lista.suscribirse(usuario2);
+
+    lista.recibirMensaje(new Borrador(usuario1, "titulo", "texto"));
+
+    assertTrue(usuario2.getCasillaDeMensajes().get(0).getTexto().contains("pie de pagina"));
+  }
+
+  @Test
+  void sePuedenConvinarPieDePaginaYPrefijo() {
+    lista.setPrefijo("prefijo");
+    lista.setPieDePagina("pie de pagina");
+    lista.cambiarPrivacidad(new Libre());
+    lista.cambiarModoDeSuscripcion(new Abierta());
+    lista.suscribirse(usuario2);
+
+    usuario1.setFirma("la cabra");
+
+    lista.recibirMensaje(new Borrador(usuario1, "titulo", "texto"));
+
+    assertTrue(usuario2.getCasillaDeMensajes().get(0).getTexto().contains("prefijo"));
+    assertTrue(usuario2.getCasillaDeMensajes().get(0).getTexto().contains("pie de pagina"));
   }
 }
