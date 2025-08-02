@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import org.example.mensajes.Borrador;
 import org.example.mensajes.Mensaje;
 import org.example.mensajes.mensajeadores.Emailer;
 import org.example.mensajes.mensajeadores.Mensajeador;
@@ -15,11 +16,28 @@ import org.example.servicios.PhoneVoiceSender;
 import org.junit.jupiter.api.Test;
 
 public class UsuariosTest {
-  Usuario usuario = new Usuario("jorgito@gmail.com", "1131429193");
+  Usuario usuario;
+
+  {
+    try {
+      usuario = new Usuario("jorgito@gmail.com", "1131429193");
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   MailSender mailSender = mock(MailSender.class);
   PhoneTextSender phoneTextSender = mock(PhoneTextSender.class);
   PhoneVoiceSender phoneVoiceSender = mock(PhoneVoiceSender.class);
-  Mensaje mensaje = new Mensaje(usuario, "Titulo", "Texto");
+  Mensaje mensaje;
+
+  {
+    try {
+      mensaje = new Mensaje(new Borrador(usuario, "Titulo", "Texto"), usuario);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   @Test
   void unUsuarioPuedeRecibirMensajesDeTextoAdemasDelMail() {

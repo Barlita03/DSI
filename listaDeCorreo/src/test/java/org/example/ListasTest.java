@@ -11,7 +11,7 @@ import org.example.listasdecorreo.ListaDeCorreo;
 import org.example.listasdecorreo.modosdesuscripcion.Abierta;
 import org.example.listasdecorreo.modosdesuscripcion.Cerrada;
 import org.example.listasdecorreo.privacidad.Privada;
-import org.example.mensajes.Mail;
+import org.example.mensajes.Borrador;
 import org.example.mensajes.Mensaje;
 import org.example.mensajes.mensajeadores.Emailer;
 import org.example.servicios.MailSender;
@@ -22,8 +22,18 @@ import org.mockito.ArgumentCaptor;
 public class ListasTest {
   MailSender mailSender = mock(MailSender.class);
   ListaDeCorreo lista = new ListaDeCorreo("lista@gmail.com", List.of(), List.of(), null, null);
-  Usuario usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
-  Usuario usuario2 = new Usuario("pepito@gmail.com", "1131429193");
+  Usuario usuario1;
+  Usuario usuario2;
+
+  {
+    try {
+      usuario1 = new Usuario("jorgito@gmail.com", "1131429193");
+      usuario2 = new Usuario("pepito@gmail.com", "1131429193");
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   Emailer mensajeador = new Emailer(mailSender);
 
   @BeforeEach
@@ -50,13 +60,13 @@ public class ListasTest {
     lista.agregarMiembro(usuario1);
     lista.agregarMiembro(usuario2);
 
-    lista.enviarTodosLosMiembros(new Mensaje(null, "titulo", "texto"));
+    lista.enviarTodosLosMiembros(new Borrador(usuario1, "titulo", "texto"));
 
-    ArgumentCaptor<Mail> captor = ArgumentCaptor.forClass(Mail.class);
+    ArgumentCaptor<Mensaje> captor = ArgumentCaptor.forClass(Mensaje.class);
 
     verify(mailSender, times(2)).send(captor.capture());
 
-    List<Mail> mails = captor.getAllValues();
+    List<Mensaje> mails = captor.getAllValues();
 
     assertEquals(2, mails.size());
     assertEquals(usuario1, mails.get(0).getDestinatario());
@@ -69,13 +79,13 @@ public class ListasTest {
     lista.agregarMiembro(usuario1);
     lista.agregarMiembro(usuario2);
 
-    lista.recibirMensaje(new Mensaje(usuario2, "titulo", "texto"));
+    lista.recibirMensaje(new Borrador(usuario2, "titulo", "texto"));
 
-    ArgumentCaptor<Mail> captor = ArgumentCaptor.forClass(Mail.class);
+    ArgumentCaptor<Mensaje> captor = ArgumentCaptor.forClass(Mensaje.class);
 
     verify(mailSender, times(2)).send(captor.capture());
 
-    List<Mail> mails = captor.getAllValues();
+    List<Mensaje> mails = captor.getAllValues();
 
     assertEquals(2, mails.size());
     assertEquals(usuario1, mails.get(0).getDestinatario());
@@ -89,7 +99,7 @@ public class ListasTest {
 
     assertThrows(
         RuntimeException.class,
-        () -> lista.recibirMensaje(new Mensaje(usuario2, "titulo", "texto")));
+        () -> lista.recibirMensaje(new Borrador(usuario2, "titulo", "texto")));
   }
 
   @Test

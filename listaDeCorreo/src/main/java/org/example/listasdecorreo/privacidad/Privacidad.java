@@ -1,8 +1,8 @@
 package org.example.listasdecorreo.privacidad;
 
 import org.example.listasdecorreo.ListaDeCorreo;
-import org.example.mensajes.Mensaje;
+import org.example.mensajes.Borrador;
 
 public interface Privacidad {
-  void recibirMensaje(ListaDeCorreo lista, Mensaje mensaje);
+  void recibirMensaje(ListaDeCorreo lista, Borrador borrador);
 }
