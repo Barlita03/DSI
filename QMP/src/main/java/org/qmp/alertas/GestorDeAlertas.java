@@ -11,6 +11,8 @@ public class GestorDeAlertas {
 
   public GestorDeAlertas(ServicioMeteorologico servicioMeteorologico) {
     this.servicioMeteorologico = servicioMeteorologico;
+
+    GestorGlobalDeAlertas.agregarGestor(this);
   }
 
   public void actualizarAlertas() {
