@@ -2,6 +2,11 @@
 
 * [Diagrama de clases](https://drive.google.com/file/d/1WvX7qMPQaGr8mgbzJiANsHSr3vw8AsZV/view)
 
+  ## Practica
+  
+  * [Noodle](https://docs.google.com/document/d/1-Qpv38kB29lNuzIi88TkTg4LGbO_iNijoVesZyvG5wM/edit?tab=t.0)
+    * [Solucion](https://docs.google.com/document/d/1MLHePD5Sh37bBthZEx-sukcc4O6XV3r9g_Dxuwqq-Z0/edit?tab=t.0)
+
 # Enunciados
 
 * [MacoWins](https://docs.google.com/document/d/1mjWKl9YH9Bb39iIUl1bQj_xhx_-CjCAMpcAXRqKhVjU/edit?tab=t.0#heading=h.ijowozxsedv6)
