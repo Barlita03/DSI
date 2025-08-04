@@ -9,6 +9,7 @@ public class GestorDeCanales {
   private static final List<Canal> canales = new ArrayList<>();
 
   // --- Metodos ---
+
   public static GestorDeCanales getInstancia() {
     return instancia;
   }
