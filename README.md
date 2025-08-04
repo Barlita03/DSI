@@ -5,6 +5,7 @@
   ## Practica
   
   * [Noodle](https://docs.google.com/document/d/1-Qpv38kB29lNuzIi88TkTg4LGbO_iNijoVesZyvG5wM/edit?tab=t.0)
+    * [Diagrama de clases](https://drive.google.com/file/d/1T6IfN5Ibga6e2KConFK3zONJ9FQ1c5e5/view?usp=sharing)
     * [Solucion](https://docs.google.com/document/d/1MLHePD5Sh37bBthZEx-sukcc4O6XV3r9g_Dxuwqq-Z0/edit?tab=t.0)
 
 # Enunciados
