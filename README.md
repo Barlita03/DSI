@@ -1,6 +1,6 @@
 # Primer parcial
 
-* [Diagrama de clases](https://drive.google.com/file/d/1WvX7qMPQaGr8mgbzJiANsHSr3vw8AsZV/view)
+* [Diagrama de clases V1](https://drive.google.com/file/d/1WvX7qMPQaGr8mgbzJiANsHSr3vw8AsZV/view)
 
   ## Practica
   
