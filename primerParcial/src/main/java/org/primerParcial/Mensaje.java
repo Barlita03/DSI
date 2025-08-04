@@ -10,21 +10,11 @@ public class Mensaje {
   // --- Constructor ---
 
   public Mensaje(Canal autor, String contenido) {
-    if (autor != null) {
-      this.autor = autor;
-    } else {
-      throw new RuntimeException("El autor no puede ser null");
-    }
+    validarAutor(autor);
+    this.autor = autor;
 
-    if (contenido != null) {
-      if (!contenido.trim().isEmpty()) {
-        this.contenido = contenido;
-      } else {
-        throw new RuntimeException("El contenido no puede estar vacio");
-      }
-    } else {
-      throw new RuntimeException("El contenido no puede ser null");
-    }
+    validarContenido(contenido);
+    this.contenido = contenido;
 
     this.fecha = LocalDateTime.now();
   }
@@ -41,5 +31,23 @@ public class Mensaje {
 
   public LocalDateTime getFecha() {
     return fecha;
+  }
+
+  // --- Metodos ---
+
+  private void validarAutor (Canal autor) {
+    if (autor == null) {
+      throw new RuntimeException("El autor no puede ser null");
+    }
+  }
+
+  private void validarContenido (String contenido) {
+    if (contenido == null) {
+      throw new RuntimeException("El contenido no puede ser null");
+    } else {
+      if (contenido.trim().isEmpty()) {
+        throw new RuntimeException("El contenido no puede estar vacio");
+      }
+    }
   }
 }

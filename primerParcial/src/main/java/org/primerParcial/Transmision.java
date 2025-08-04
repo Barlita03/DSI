@@ -39,8 +39,7 @@ public class Transmision {
   }
 
   public void serIniciada() {
-    if (TransmisionesEnCurso.getInstancia().getTransmisiones().stream()
-        .noneMatch(t -> t.getAutor().equals(autor))) {
+    if (TransmisionesEnCurso.getInstancia().puedeTransmitir(autor)) {
       this.fechaInicio = LocalDateTime.now();
       TransmisionesEnCurso.agregarTransmision(this);
     } else {
@@ -57,14 +56,17 @@ public class Transmision {
 
   public void agregarVisualizador(Canal canal) {
     espectadores.add(canal);
-
-    if (espectadores.size() > maximoParticipantes) {
-      maximoParticipantes = espectadores.size();
-    }
+    actualizarMaximoParticipantes();
   }
 
   public void quitarVisualizador(Canal canal) {
     espectadores.remove(canal);
+  }
+
+  private void actualizarMaximoParticipantes() {
+    if (espectadores.size() > maximoParticipantes) {
+      maximoParticipantes = espectadores.size();
+    }
   }
 
   // --- Getters ---

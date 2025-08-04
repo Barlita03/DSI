@@ -27,4 +27,8 @@ public class TransmisionesEnCurso {
   public static void limpiarLista() {
     transmisiones.clear();
   }
+
+  public boolean puedeTransmitir(Canal canal) {
+    return transmisiones.stream().noneMatch(t -> t.getAutor().equals(canal));
+  }
 }

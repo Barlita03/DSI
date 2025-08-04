@@ -24,16 +24,19 @@ public class Canal {
     suscriptores.remove(canal);
   }
 
-  public void recibirApoyo(Integer numero) {
-    if (numero < 1 || numero > 10) {
-      throw new RuntimeException("El apoyo debe estar entre 1 y 10");
-    }
-
-    muestrasDeApoyo.add(numero);
+  public void recibirApoyo(Integer apoyo) {
+    validarApoyo(apoyo);
+    muestrasDeApoyo.add(apoyo);
   }
 
   public void agregarAlHistorico(Transmision transmision) {
     historicoTransmisiones.add(transmision);
+  }
+
+  private void validarApoyo(Integer apoyo) {
+    if (apoyo < 1 || apoyo > 10) {
+      throw new RuntimeException("El apoyo debe estar entre 1 y 10");
+    }
   }
 
   // --- Getters ---
