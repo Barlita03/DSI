@@ -2,6 +2,15 @@
 
 * [Diagrama de clases](https://drive.google.com/file/d/1WvX7qMPQaGr8mgbzJiANsHSr3vw8AsZV/view)
 
+  ## Practica
+  
+  * [Noodle](https://docs.google.com/document/d/1-Qpv38kB29lNuzIi88TkTg4LGbO_iNijoVesZyvG5wM/edit?tab=t.0)
+    * [Diagrama de clases](https://drive.google.com/file/d/1T6IfN5Ibga6e2KConFK3zONJ9FQ1c5e5/view?usp=sharing)
+    * [Solucion](https://docs.google.com/document/d/1MLHePD5Sh37bBthZEx-sukcc4O6XV3r9g_Dxuwqq-Z0/edit?tab=t.0)
+  * [Copia.Me](https://docs.google.com/document/d/1NIgfMwyokaJ5U1oFXCGDVOIt5Pbh80Aat6o-v8MOqYk/edit?tab=t.0)
+    * [Diagrama de clases](https://drive.google.com/file/d/1amC00fsCRA1I5s3x2HPF2-09X6wxy8rk/view?usp=sharing)
+    * [Solucion](https://docs.google.com/document/d/1t7oUyhheEcPjoj2XzNu0x4pB_BGTUmbjhDjskDB2k1I/edit?tab=t.0)
+
 # Enunciados
 
 * [MacoWins](https://docs.google.com/document/d/1mjWKl9YH9Bb39iIUl1bQj_xhx_-CjCAMpcAXRqKhVjU/edit?tab=t.0#heading=h.ijowozxsedv6)
