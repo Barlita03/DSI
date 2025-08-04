@@ -17,17 +17,11 @@ public class Transmision {
   // --- Constructor ---
 
   public Transmision(Canal autor, String titulo, String... categorias) {
-    if (autor != null) {
-      this.autor = autor;
-    } else {
-      throw new RuntimeException("El autor no puede ser null");
-    }
+    validarAutor(autor);
+    this.autor = autor;
 
-    if (titulo != null) {
-      this.titulo = titulo;
-    } else {
-      throw new RuntimeException("El titulo no puede ser null");
-    }
+    validarTitulo(titulo);
+    this.titulo = titulo;
 
     this.categorias.addAll(List.of(categorias));
   }
@@ -66,6 +60,18 @@ public class Transmision {
   private void actualizarMaximoDeEspectadores() {
     if (espectadores.size() > maximoParticipantes) {
       maximoParticipantes = espectadores.size();
+    }
+  }
+
+  private void validarAutor(Canal autor) {
+    if (autor == null) {
+      throw new RuntimeException("El autor no puede ser null");
+    }
+  }
+
+  private void validarTitulo(String titulo) {
+    if (titulo == null) {
+      throw new RuntimeException("El titulo no puede ser null");
     }
   }
 
