@@ -2,6 +2,7 @@ package org.primerParcial;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GestorDeCanales {
   private static final GestorDeCanales instancia = new GestorDeCanales();
@@ -26,5 +27,9 @@ public class GestorDeCanales {
 
   public static void limpiarLista() {
     canales.clear();
+  }
+
+  public static List<Transmision> getTransmisionesEnCurso() {
+    return canales.stream().map(Canal::getTransmisionEnCurso).filter(Objects::nonNull).toList();
   }
 }

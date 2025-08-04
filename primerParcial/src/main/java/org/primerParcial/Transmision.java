@@ -39,10 +39,9 @@ public class Transmision {
   }
 
   public void serIniciada() {
-    if (TransmisionesEnCurso.getInstancia().getTransmisiones().stream()
-        .noneMatch(t -> t.getAutor().equals(autor))) {
+    if (autor.puedeTransmitir()) {
       this.fechaInicio = LocalDateTime.now();
-      TransmisionesEnCurso.agregarTransmision(this);
+      autor.setTransmisionEnCurso(this);
     } else {
       throw new RuntimeException("El canal ya tiene una transmision en curso");
     }
@@ -50,21 +49,24 @@ public class Transmision {
 
   public void serFinalizada() {
     this.fechaFin = LocalDateTime.now();
-    TransmisionesEnCurso.eliminarTransmision(this);
     espectadores.clear();
+    autor.setTransmisionEnCurso(null);
     autor.agregarAlHistorico(this);
   }
 
   public void agregarVisualizador(Canal canal) {
     espectadores.add(canal);
-
-    if (espectadores.size() > maximoParticipantes) {
-      maximoParticipantes = espectadores.size();
-    }
+    actualizarMaximoDeEspectadores();
   }
 
   public void quitarVisualizador(Canal canal) {
     espectadores.remove(canal);
+  }
+
+  private void actualizarMaximoDeEspectadores() {
+    if (espectadores.size() > maximoParticipantes) {
+      maximoParticipantes = espectadores.size();
+    }
   }
 
   // --- Getters ---

@@ -15,7 +15,6 @@ public class ParcialTests {
   @BeforeEach
   public void setup() {
     GestorDeCanales.limpiarLista();
-    TransmisionesEnCurso.limpiarLista();
   }
 
   @Test
@@ -25,14 +24,14 @@ public class ParcialTests {
     Transmision transmision = new Transmision(canal, "transmision");
 
     assertNull(transmision.getInicio());
-    assertEquals(0, TransmisionesEnCurso.getInstancia().getTransmisiones().size());
+    assertEquals(0, GestorDeCanales.getTransmisionesEnCurso().size());
 
     transmision.serIniciada();
 
     assertEquals(
         LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
         transmision.getInicio().truncatedTo(ChronoUnit.SECONDS));
-    assertEquals(1, TransmisionesEnCurso.getInstancia().getTransmisiones().size());
+    assertEquals(1, GestorDeCanales.getTransmisionesEnCurso().size());
   }
 
   @Test
@@ -49,13 +48,14 @@ public class ParcialTests {
     transmision1.serFinalizada();
     transmision2.serIniciada();
 
+    assertEquals(1, canal.getHistoricoTransmisiones().size());
     assertEquals(
         LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
         transmision1.getFin().truncatedTo(ChronoUnit.SECONDS));
     assertEquals(
         LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
         transmision2.getInicio().truncatedTo(ChronoUnit.SECONDS));
-    assertEquals(1, TransmisionesEnCurso.getInstancia().getTransmisiones().size());
+    assertEquals(1, GestorDeCanales.getTransmisionesEnCurso().size());
   }
 
   @Test
@@ -88,7 +88,7 @@ public class ParcialTests {
     new Transmision(canal2, "transmision").serIniciada();
     new Transmision(canal3, "transmision").serIniciada();
 
-    assertEquals(3, TransmisionesEnCurso.getInstancia().getTransmisiones().size());
+    assertEquals(3, GestorDeCanales.getTransmisionesEnCurso().size());
   }
 
   @Test
