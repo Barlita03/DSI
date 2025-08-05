@@ -11,6 +11,9 @@
   * [Copia.Me](https://docs.google.com/document/d/1NIgfMwyokaJ5U1oFXCGDVOIt5Pbh80Aat6o-v8MOqYk/edit?tab=t.0)
     * [Diagrama de clases](https://drive.google.com/file/d/1amC00fsCRA1I5s3x2HPF2-09X6wxy8rk/view?usp=sharing)
     * [Solucion](https://docs.google.com/document/d/1t7oUyhheEcPjoj2XzNu0x4pB_BGTUmbjhDjskDB2k1I/edit?tab=t.0)
+  * [Hitbug](https://docs.google.com/document/d/1TngwZCctCp4qKsdw89HLUc_GLSb6mxZ7_lJTTj3TOLM/edit?tab=t.0)
+    * [Diagrama de clases](https://drive.google.com/file/d/181VHn9n-kGH8i0jKSIqVkuVpJnmzIHhX/view?usp=sharing)
+    * [Solucion](https://docs.google.com/document/d/1_ftxB1gTeNkN1qN_EMEIaF0vgtLkcH1SHwk-XA5_S1s/edit?tab=t.0#heading=h.a8h29wnqs92r)
 
 # Enunciados
 
