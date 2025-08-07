@@ -21,6 +21,8 @@
     * [Diagrama de clases](https://drive.google.com/file/d/19lrx3rJVqCrYOsOqTaUVKmxXgCDQvfHA/view?usp=sharing)
   * [Nefli](https://docs.google.com/document/d/1YYFk99LmQp1OrRuyhAagUVa4J8lwGkMHd_tbj5gHYk8/edit?tab=t.0#heading=h.23sfop5wdivl)
     * [Diagrama de clases](https://drive.google.com/file/d/18enLaN_aMqCiKBEGWMiiOEsRdUEq8J9L/view?usp=sharing)
+  * [Basher](https://docs.google.com/document/d/1qf-2U2S_XIpJAMSsYF0bWerjqIu7_jLvVVXfLSkMpIk/edit?tab=t.0)
+    * [Diagrama de clases](https://drive.google.com/file/d/1PHc6G8EZ_n1lg80JtE_Ywj8mvHRESebg/view?usp=sharing)
 
 # Enunciados
 
