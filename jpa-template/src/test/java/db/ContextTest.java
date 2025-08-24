@@ -18,9 +18,4 @@ public class ContextTest implements SimplePersistenceTest {
     withTransaction(() -> {
     });
   }
-
-  @Test
-  void aaa() {
-
-  }
 }
