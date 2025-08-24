@@ -25,8 +25,8 @@
     * [Diagrama de clases](https://drive.google.com/file/d/1PHc6G8EZ_n1lg80JtE_Ywj8mvHRESebg/view?usp=sharing)
   * [Tatsy](https://docs.google.com/document/d/1q0nP2koMy8q2WvYmaLLTt5D6jh057DkA7Kc4YjBJDng/edit?tab=t.0)
     * [Diagrama de clases](https://drive.google.com/file/d/1TRz9SUVfik768GIxBDUyqpwJKhGBOEb1/view?usp=sharing)
-   
-    * https://docs.google.com/document/d/1q0nP2koMy8q2WvYmaLLTt5D6jh057DkA7Kc4YjBJDng/edit?tab=t.0
+  * [Sueños](https://docs.google.com/document/d/1kv5i-LgijfBkkkdnQLlPhQKksSOLqYN_9PhQJKVXBbg/edit?tab=t.0)
+    * [Diagrama de clases](https://drive.google.com/file/d/1OZdyTEYexCCHqPZxlBkBoZwgpPaT38nv/view?usp=sharing)
 
 # Enunciados
 
