@@ -1,4 +1,4 @@
-package db;
+package org.canchaDePaddel;
 
 import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
 import org.junit.jupiter.api.Test;
