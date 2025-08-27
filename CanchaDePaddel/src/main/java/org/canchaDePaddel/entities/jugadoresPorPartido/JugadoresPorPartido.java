@@ -1,16 +1,14 @@
-package org.canchaDePaddel.entities;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+package org.canchaDePaddel.entities.jugadoresPorPartido;
 
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.canchaDePaddel.entities.Jugador;
+import org.canchaDePaddel.entities.Paleta;
+import org.canchaDePaddel.entities.Partido;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "jugadoresPorPartido")
 @IdClass(JugadoresPorPartidoId.class)

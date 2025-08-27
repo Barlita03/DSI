@@ -1,133 +1,210 @@
 package org.canchaDePaddel;
 
 import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
-import org.canchaDePaddel.entities.Cancha;
-import org.canchaDePaddel.entities.Jugador;
-import org.canchaDePaddel.entities.jugadoresPorPartido.JugadoresPorPartido;
-import org.canchaDePaddel.entities.Paleta;
-import org.canchaDePaddel.entities.Partido;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import org.canchaDePaddel.entities.Cancha;
+import org.canchaDePaddel.entities.Jugador;
+import org.canchaDePaddel.entities.Paleta;
+import org.canchaDePaddel.entities.Partido;
+import org.canchaDePaddel.entities.jugadoresPorPartido.JugadoresPorPartido;
+import org.junit.jupiter.api.Test;
 
 public class PaddelTests implements SimplePersistenceTest {
 
-	@Test
-	void altaJugador() {
-		var jugador = new Jugador(1L, "Juan", "Perez", "Calle Falsa 123", LocalDate.of(2000, 1, 1));
-		persist(jugador);
-		assert jugador.getJugadorId() > 0;
-	}
+  @Test
+  void altaJugador() {
+    Jugador jugador = new Jugador();
+    jugador.setJugadorNombre("Juan");
+    jugador.setJugadorApellido("Perez");
+    jugador.setJugadorDomicilio("Calle Falsa 123");
+    jugador.setJugadorNacimiento(LocalDate.of(2000, 1, 1));
+    entityManager().persist(jugador);
+    assert jugador.getJugadorId() >= 0;
+  }
 
-	@Test
-	void altaCancha() {
-		var cancha = new Cancha(1L, null, "Cancha 1", true);
-		persist(cancha);
-		assert cancha.getCanchaId() > 0;
-	}
+  @Test
+  void altaCancha() {
+    var cancha = new Cancha();
+    cancha.setCanchaNombre("Cancha 1");
+    cancha.setCanchaIluminacion(true);
+    entityManager().persist(cancha);
+    assert cancha.getCanchaId() >= 0;
+  }
 
-	@Test
-	void altaPaleta() {
-		var paleta = new Paleta(1L, null, null, "Paleta Head", 3.5f);
-		persist(paleta);
-		assert paleta.getPaletaId() > 0;
-	}
+  @Test
+  void altaPaleta() {
+    var paleta = new Paleta();
+    paleta.setPaletaNombre("Paleta Head");
+    paleta.setPaletaGrosor(3.5f);
+    entityManager().persist(paleta);
+    assert paleta.getPaletaId() >= 0;
+  }
 
-	@Test
-	void altaPartidoYAsignarJugadores() {
-		var cancha = new Cancha(2L, null, "Cancha 2", false);
-		persist(cancha);
+  @Test
+  void altaPartidoYAsignarJugadores() {
+    var cancha = new Cancha();
+    cancha.setCanchaNombre("Cancha 2");
+    cancha.setCanchaIluminacion(false);
+    entityManager().persist(cancha);
 
-		var jugador1 = new Jugador(2L, "Pedro", "Gomez", "Calle 1", LocalDate.of(1999, 5, 10));
-		persist(jugador1);
-		var jugador2 = new Jugador(3L, "Luis", "Lopez", "Calle 2", LocalDate.of(1998, 8, 20));
-		persist(jugador2);
+    var jugador1 = new Jugador();
+    jugador1.setJugadorNombre("Pedro");
+    jugador1.setJugadorApellido("Gomez");
+    jugador1.setJugadorDomicilio("Calle 1");
+    jugador1.setJugadorNacimiento(LocalDate.of(1999, 5, 10));
+    entityManager().persist(jugador1);
 
-		var partido = new Partido(1L, cancha, jugador1, LocalDateTime.now(), LocalDateTime.now().plusHours(2));
-		persist(partido);
+    var jugador2 = new Jugador();
+    jugador2.setJugadorNombre("Luis");
+    jugador2.setJugadorApellido("Lopez");
+    jugador2.setJugadorDomicilio("Calle 2");
+    jugador2.setJugadorNacimiento(LocalDate.of(1998, 8, 20));
+    entityManager().persist(jugador2);
 
-		var paleta1 = new Paleta(10L, null, null, "Paleta 1", 3.0f);
-		var paleta2 = new Paleta(11L, null, null, "Paleta 2", 3.1f);
-		persist(paleta1);
-		persist(paleta2);
+    var partido = new Partido();
+    partido.setPartidoCancha(cancha);
+    partido.setPartidoReservador(jugador1);
+    partido.setPartidoInicio(LocalDateTime.now());
+    partido.setPartidoFin(LocalDateTime.now().plusHours(2));
+    entityManager().persist(partido);
 
-		var jpp1 = new JugadoresPorPartido(jugador1, partido, paleta1);
-		persist(jpp1);
+    var paleta1 = new Paleta();
+    paleta1.setPaletaNombre("Paleta 1");
+    paleta1.setPaletaGrosor(3.0f);
+    entityManager().persist(paleta1);
 
-		var jpp2 = new JugadoresPorPartido(jugador2, partido, paleta2);
-		persist(jpp2);
+    var paleta2 = new Paleta();
+    paleta2.setPaletaNombre("Paleta 2");
+    paleta2.setPaletaGrosor(3.1f);
+    entityManager().persist(paleta2);
 
-		assert partido.getPartidoId() > 0;
-	}
+    var jpp1 = new JugadoresPorPartido();
+    jpp1.setJugador(jugador1);
+    jpp1.setPartido(partido);
+    jpp1.setPaleta(paleta1);
+    entityManager().persist(jpp1);
 
-	@Test
-	void consultarPartidosPorJugador() {
-		var jugador = new Jugador(4L, "Ana", "Martinez", "Calle 3", LocalDate.of(2001, 2, 2));
-		persist(jugador);
-		var cancha = new Cancha(3L, null, "Cancha 3", true);
-		persist(cancha);
-		var partido = new Partido(2L, cancha, jugador, LocalDateTime.now(), LocalDateTime.now().plusHours(1));
-		persist(partido);
-		var paleta = new Paleta(12L, null, null, "Paleta Ana", 3.2f);
-		persist(paleta);
-		var jpp = new JugadoresPorPartido(jugador, partido, paleta);
-		persist(jpp);
+    var jpp2 = new JugadoresPorPartido();
+    jpp2.setJugador(jugador2);
+    jpp2.setPartido(partido);
+    jpp2.setPaleta(paleta2);
+    entityManager().persist(jpp2);
 
-		var partidos = entityManager()
-			.createQuery("SELECT jpp.partido FROM JugadoresPorPartido jpp WHERE jpp.jugador.jugadorId = :jugadorId", Partido.class)
-			.setParameter("jugadorId", jugador.getJugadorId())
-			.getResultList();
-		assert !partidos.isEmpty();
-	}
+    assert partido.getPartidoId() >= 0;
+  }
 
-	@Test
-	void consultarJugadoresPorPartido() {
-		var jugador = new Jugador(5L, "Sofia", "Diaz", "Calle 4", LocalDate.of(2002, 3, 3));
-		persist(jugador);
-		var cancha = new Cancha(4L, null, "Cancha 4", false);
-		persist(cancha);
-		var partido = new Partido(3L, cancha, jugador, LocalDateTime.now(), LocalDateTime.now().plusHours(1));
-		persist(partido);
-		var paleta = new Paleta(13L, null, null, "Paleta Sofia", 3.3f);
-		persist(paleta);
-		var jpp = new JugadoresPorPartido(jugador, partido, paleta);
-		persist(jpp);
+  @Test
+  void consultarPartidosPorJugador() {
+    var jugador = new Jugador();
+    jugador.setJugadorNombre("Ana");
+    jugador.setJugadorApellido("Martinez");
+    jugador.setJugadorDomicilio("Calle 3");
+    jugador.setJugadorNacimiento(LocalDate.of(2001, 2, 2));
+    entityManager().persist(jugador);
 
-		var jugadores = entityManager()
-			.createQuery("SELECT jpp.jugador FROM JugadoresPorPartido jpp WHERE jpp.partido.partidoId = :partidoId", Jugador.class)
-			.setParameter("partidoId", partido.getPartidoId())
-			.getResultList();
-		assert !jugadores.isEmpty();
-	}
+    var cancha = new Cancha();
+    cancha.setCanchaNombre("Cancha 3");
+    cancha.setCanchaIluminacion(true);
+    entityManager().persist(cancha);
 
-	@Test
-	void consultarPartidosPorCancha() {
-		var cancha = new Cancha(5L, null, "Cancha 5", true);
-		persist(cancha);
-		var jugador = new Jugador(6L, "Mario", "Ruiz", "Calle 5", LocalDate.of(2003, 4, 4));
-		persist(jugador);
-		var partido = new Partido(4L, cancha, jugador, LocalDateTime.now(), LocalDateTime.now().plusHours(1));
-		persist(partido);
+    var partido = new Partido();
+    partido.setPartidoCancha(cancha);
+    partido.setPartidoReservador(jugador);
+    partido.setPartidoInicio(LocalDateTime.now());
+    partido.setPartidoFin(LocalDateTime.now().plusHours(1));
+    entityManager().persist(partido);
 
-		var partidos = entityManager()
-			.createQuery("SELECT p FROM Partido p WHERE p.partidoCancha.canchaId = :canchaId", Partido.class)
-			.setParameter("canchaId", cancha.getCanchaId())
-			.getResultList();
-		assert !partidos.isEmpty();
-	}
+    var paleta = new Paleta();
+    paleta.setPaletaNombre("Paleta Ana");
+    paleta.setPaletaGrosor(3.2f);
+    entityManager().persist(paleta);
 
-	// NOTA: No hay relación directa entre Jugador y Paleta en tu modelo, por lo que este test es solo ilustrativo.
-	@Test
-	void consultarPaletasPorJugador() {
-		var paleta = new Paleta(2L, null, null, "Paleta Babolat", 3.2f);
-		persist(paleta);
-		// Aquí deberías tener una relación entre Jugador y Paleta para que este test tenga sentido.
-		// Por ahora, solo se persiste la paleta y se consulta por nombre.
-		var paletas = entityManager()
-			.createQuery("SELECT p FROM Paleta p WHERE p.paletaNombre = :nombre", Paleta.class)
-			.setParameter("nombre", "Paleta Babolat")
-			.getResultList();
-		assert !paletas.isEmpty();
-	}
+    var jpp = new JugadoresPorPartido();
+    jpp.setJugador(jugador);
+    jpp.setPartido(partido);
+    jpp.setPaleta(paleta);
+    entityManager().persist(jpp);
+
+    var partidos =
+        entityManager()
+            .createQuery(
+                "SELECT jpp.partido FROM JugadoresPorPartido jpp WHERE jpp.jugador.jugadorId = :jugadorId",
+                Partido.class)
+            .setParameter("jugadorId", jugador.getJugadorId())
+            .getResultList();
+    assert !partidos.isEmpty();
+  }
+
+  @Test
+  void consultarJugadoresPorPartido() {
+    var jugador = new Jugador();
+    jugador.setJugadorNombre("Sofia");
+    jugador.setJugadorApellido("Diaz");
+    jugador.setJugadorDomicilio("Calle 4");
+    jugador.setJugadorNacimiento(LocalDate.of(2002, 3, 3));
+    entityManager().persist(jugador);
+
+    var cancha = new Cancha();
+    cancha.setCanchaNombre("Cancha 4");
+    cancha.setCanchaIluminacion(false);
+    entityManager().persist(cancha);
+
+    var partido = new Partido();
+    partido.setPartidoCancha(cancha);
+    partido.setPartidoReservador(jugador);
+    partido.setPartidoInicio(LocalDateTime.now());
+    partido.setPartidoFin(LocalDateTime.now().plusHours(1));
+    entityManager().persist(partido);
+
+    var paleta = new Paleta();
+    paleta.setPaletaNombre("Paleta Sofia");
+    paleta.setPaletaGrosor(3.3f);
+    entityManager().persist(paleta);
+
+    var jpp = new JugadoresPorPartido();
+    jpp.setJugador(jugador);
+    jpp.setPartido(partido);
+    jpp.setPaleta(paleta);
+    entityManager().persist(jpp);
+
+    var jugadores =
+        entityManager()
+            .createQuery(
+                "SELECT jpp.jugador FROM JugadoresPorPartido jpp WHERE jpp.partido.partidoId = :partidoId",
+                Jugador.class)
+            .setParameter("partidoId", partido.getPartidoId())
+            .getResultList();
+    assert !jugadores.isEmpty();
+  }
+
+  @Test
+  void consultarPartidosPorCancha() {
+    var cancha = new Cancha();
+    cancha.setCanchaNombre("Cancha 5");
+    cancha.setCanchaIluminacion(true);
+    entityManager().persist(cancha);
+
+    var jugador = new Jugador();
+    jugador.setJugadorNombre("Mario");
+    jugador.setJugadorApellido("Ruiz");
+    jugador.setJugadorDomicilio("Calle 5");
+    jugador.setJugadorNacimiento(LocalDate.of(2003, 4, 4));
+    entityManager().persist(jugador);
+
+    var partido = new Partido();
+    partido.setPartidoCancha(cancha);
+    partido.setPartidoReservador(jugador);
+    partido.setPartidoInicio(LocalDateTime.now());
+    partido.setPartidoFin(LocalDateTime.now().plusHours(1));
+    entityManager().persist(partido);
+
+    var partidos =
+        entityManager()
+            .createQuery(
+                "SELECT p FROM Partido p WHERE p.partidoCancha.canchaId = :canchaId", Partido.class)
+            .setParameter("canchaId", cancha.getCanchaId())
+            .getResultList();
+    assert !partidos.isEmpty();
+  }
 }

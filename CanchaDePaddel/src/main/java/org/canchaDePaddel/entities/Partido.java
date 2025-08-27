@@ -1,20 +1,17 @@
 package org.canchaDePaddel.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity
 @Table(name = "partidos")
 public class Partido {
@@ -23,11 +20,9 @@ public class Partido {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long partidoId;
 
-  @ManyToOne
-  private Cancha partidoCancha;
+  @ManyToOne private Cancha partidoCancha;
 
-  @ManyToOne
-  private Jugador partidoReservador;
+  @ManyToOne private Jugador partidoReservador;
 
   private LocalDateTime partidoInicio;
   private LocalDateTime partidoFin;
